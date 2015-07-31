@@ -95,55 +95,55 @@ A style guide for the Sightly, the HTML templating system from Adobe Experience 
     <sly data-sly-include="content.html"></sly>
     ```
     
-    - [4.2](#4.2) <a name='4.2'></a> **Always wrap your component markup inside a data-sly-use statement.**
+  - [4.2](#4.2) <a name='4.2'></a> **Always wrap your component markup inside a data-sly-use statement.**
     
     If the Java or JavaScript Use-API is not working, it won’t try to process the logic inside it.
 
     ```html
     <!--/* Bad */-->
-    <sly data-sly-use.teaser="com.nc.TeaserComponent" data-sly-unwrap></sly>
+    <sly data-sly-use.teaser="com.example.TeaserComponent" data-sly-unwrap></sly>
      
     <div class="teaser">
         <a class="teaser__link" href="${teaser.link}"></a>
     </div>
      
     <!--/* Good */-->
-    <sly data-sly-use.teaser="com.nc.TeaserComponent" data-sly-unwrap>
+    <sly data-sly-use.teaser="com.example.TeaserComponent" data-sly-unwrap>
         <div class="teaser">
             <a class="teaser__link" href="${teaser.link}"></a>
         </div>
     </sly>
     ```
     
-    - [4.3](#4.3) <a name='4.3'></a> **Use meaningful identifier names.**
+  - [4.3](#4.3) <a name='4.3'></a> **Use meaningful identifier names.**
 
     ```html
     <!--/* Bad */-->
-    <sly data-sly-use.comp="com.nc.TeaserComponent" data-sly-unwrap>
+    <sly data-sly-use.comp="com.example.TeaserComponent" data-sly-unwrap>
         ...
     </sly>
      
     <!--/* Good */-->
-    <sly data-sly-use.teaser="com.nc.TeaserComponent" data-sly-unwrap>
+    <sly data-sly-use.teaser="com.example.TeaserComponent" data-sly-unwrap>
         ...
     </sly>
     ```
     
-    - [4.4](#4.4) <a name='4.4'></a> **Use camelcase for identifier names.**
+  - [4.4](#4.4) <a name='4.4'></a> **Use camelcase for identifier names.**
 
     ```html
     <!--/* Bad */-->
-    <sly data-sly-use.mediagallery="com.nc.MediaGallery" data-sly-unwrap>
+    <sly data-sly-use.mediagallery="com.example.MediaGallery" data-sly-unwrap>
         ...
     </sly>
      
     <!--/* Good */-->
-    <sly data-sly-use.mediaGallery="com.nc.MediaGallery" data-sly-unwrap>
+    <sly data-sly-use.mediaGallery="com.example.MediaGallery" data-sly-unwrap>
         ...
     </sly>
     ```
     
-    - [4.5](#4.5) <a name='4.5'></a> **Always cache test block statement results in an identifier if it repeats itself.**
+  - [4.5](#4.5) <a name='4.5'></a> **Always cache test block statement results in an identifier if it repeats itself.**
 
     ```html
     <!--/* Bad */-->
@@ -161,7 +161,7 @@ A style guide for the Sightly, the HTML templating system from Adobe Experience 
     <div class="cq-placeholder" data-sly-test="${!hasContent}"></div>
     ```
     
-    - [4.6](#4.6) <a name='4.6'></a> **Always use identifiers instead of the default “item” variable for list block statements.**
+  - [4.6](#4.6) <a name='4.6'></a> **Always use identifiers instead of the default “item” variable for list block statements.**
 
     ```html
     <!--/* Bad */-->
@@ -179,7 +179,7 @@ A style guide for the Sightly, the HTML templating system from Adobe Experience 
     </ul>
     ```
     
-    - [4.7](#4.7) <a name='4.7'></a> **Always place your block statements after your normal HTML attributes.**
+  - [4.7](#4.7) <a name='4.7'></a> **Always place your block statements after your normal HTML attributes.**
 
     ```html
     <!--/* Bad */-->
@@ -189,7 +189,7 @@ A style guide for the Sightly, the HTML templating system from Adobe Experience 
     <p class="teaser__text" data-sly-test="${teaser.text}"></p>
     ```
     
-    - [4.8](#4.8) <a name='4.8'></a> **Unwrap all includes, resources and other HTML elements that are not part of the markup.**
+  - [4.8](#4.8) <a name='4.8'></a> **Unwrap all includes, resources and other HTML elements that are not part of the markup.**
     
     Elements that are not unwrapped will be rendered as empty elements in the final HTML markup.
 
@@ -211,7 +211,7 @@ A style guide for the Sightly, the HTML templating system from Adobe Experience 
     </sly>
     ```
     
-    - [4.9](#4.9) <a name='4.9'></a> **Try to avoid Sightly element, attribute and text block statements.**
+  - [4.9](#4.9) <a name='4.9'></a> **Try to avoid Sightly element, attribute and text block statements.**
 
     ```html
     <!--/* Bad */-->
@@ -225,7 +225,7 @@ A style guide for the Sightly, the HTML templating system from Adobe Experience 
     <p class="event__year">${event.year}</p>
     ```
     
-    - [4.10](#4.10) <a name='4.10'></a> **Always place your unwrap statements at the end of the HTML tag.**
+  - [4.10](#4.10) <a name='4.10'></a> **Always place your unwrap statements at the end of the HTML tag.**
 
     ```html
     <!--/* Bad */-->
@@ -239,7 +239,7 @@ A style guide for the Sightly, the HTML templating system from Adobe Experience 
     </sly>
     ```
     
-    - [4.11](#4.11) <a name='4.11'></a> **Always use existing HTML elements for your block statements if possible.**
+  - [4.11](#4.11) <a name='4.11'></a> **Always use existing HTML elements for your block statements if possible.**
 
     ```html
     <!--/* Bad */-->
