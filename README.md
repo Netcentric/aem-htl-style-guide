@@ -1,5 +1,5 @@
 # AEM Sightly Style Guide
-A style guide for the Sightly, the HTML templating system from Adobe Experience Manager (AEM).
+A style guide for Sightly, the HTML templating system from Adobe Experience Manager (AEM).
 
 ## Table of Contents
 
