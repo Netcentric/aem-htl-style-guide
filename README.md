@@ -13,6 +13,9 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
 ## 1. HTML
 
   - [1.1](#1.1) <a name='1.1'></a> **Always self close HTML void elements.**
+  
+  Although in HTML5 it states that the self closing “/” is optional. It could generate errors in your Sightly script if you don’t add them.&nbsp;Here’s a list of <a href="http://www.w3.org/TR/html-markup/syntax.html#syntax-elements" target="_blank">all void elements</a> in HTML.
+  
     ```html
     <!--/* Bad */-->
     <input type="text" name="name">
@@ -53,10 +56,10 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
 
     ```html
     <!--/* Bad */-->
-    <a href="${teaser.link @ context = 'uri'}">...</a>
+    <a href="${teaser.link @ context = 'uri'}"></a>
  
     <!--/* Good */-->
-    <a href="${teaser.link}>...</a>
+    <a href="${teaser.link}></a>
     ```
 
   - [3.2](#3.2) <a name='3.2'></a> **Always use the safest display context as possible.**
@@ -65,10 +68,10 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
 
     ```html
     <!--/* Bad */-->
-    <span style="color: ${properties.color @ context='unsafe'};">...</span>
+    <p style="color: ${properties.color @ context='unsafe'};"></p>
  
     <!--/* Good */-->
-    <span style="color: ${properties.color @ context='styleToken'};">...</span>
+    <p style="color: ${properties.color @ context='styleToken'};"></p>
     ```
 <tag href="${myHrefValue}"></tag>
 
