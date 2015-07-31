@@ -43,17 +43,30 @@ A style guide for the Sightly, the HTML templating system from Adobe Experience 
 
 ## 3. Expression language <a name='expression-language'></a>
 
-  - [3.1](#3.1) <a name='3.1'></a> **Always use the safest display context as possible.**
+  - [3.1](#3.1) <a name='3.1'></a> **Only set a display context if necessary**
+  
+  In most cases the context is determined automatically.
+
+    ```html
+    <!--/* Bad */-->
+    <a href="${teaser.link @ context = 'uri'}">...</a>
+ 
+    <!--/* Good */-->
+    <a href="${teaser.link}>...</a>
+    ```
+
+  - [3.2](#3.2) <a name='3.2'></a> **Always use the safest display context as possible.**
   
     See here a list of all the available <a href="https://github.com/Adobe-Marketing-Cloud/sightly-spec/blob/master/SPECIFICATION.md#121-display-context" target="_blank">display contexts</a>.
 
     ```html
     <!--/* Bad */-->
-    <h2>${teaser.headline @ context = 'html'}</h2>
+    <span style="color: ${properties.color @ context='unsafe'};">...</span>
  
     <!--/* Good */-->
-    <h2>${teaser.headline @ context = 'text'}</h2>
+    <span style="color: ${properties.color @ context='styleToken'};">...</span>
     ```
+<tag href="${myHrefValue}"></tag>
 
 **[⬆ back to top](#table-of-contents)**
 
@@ -288,5 +301,32 @@ A style guide for the Sightly, the HTML templating system from Adobe Experience 
         <js data-sly-call="${clientLib.js @ categories='project.author'}" data-sly-test="${!wcmmode.disabled}" data-sly-unwrap></js>
     </body>
     ```
+
+**[⬆ back to top](#table-of-contents)**
+
+## License
+
+(The MIT License)
+
+Copyright (c) 2014 Airbnb
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+'Software'), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 **[⬆ back to top](#table-of-contents)**
