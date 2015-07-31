@@ -7,6 +7,7 @@ A style guide for the Sightly, the HTML templating system from Adobe Experience 
   2. [Comments](#comments)
   3. [Expression language](#expression-language)
   4. [Block statements](#block-statements)
+  5. [Client libraries](#client-libraries)
 
 <a name='html'></a>
 ## 1. HTML
@@ -28,7 +29,8 @@ A style guide for the Sightly, the HTML templating system from Adobe Experience 
 
 **[⬆ back to top](#table-of-contents)**
 
-## 2. Comments <a name='comments'></a>
+<a name='comments'></a>
+## 2. Comments
 
   - [2.1](#2.1) <a name='2.1'></a> **Always use Sightly comments.**
   
