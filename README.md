@@ -8,7 +8,8 @@ A style guide for the Sightly, the HTML templating system from Adobe Experience 
   3. [Expression language](#expression-language)
   4. [Block statements](#block-statements)
 
-## 1. HTML <a name='html'></a>
+<a name='html'></a>
+## 1. HTML
 
   - [1.1](#1.1) <a name='1.1'></a> **Always self close HTML void elements.**
     ```html
@@ -41,7 +42,8 @@ A style guide for the Sightly, the HTML templating system from Adobe Experience 
 
 **[⬆ back to top](#table-of-contents)**
 
-## 3. Expression language <a name='expression-language'></a>
+<a name='expression-language'></a>
+## 3. Expression language
 
   - [3.1](#3.1) <a name='3.1'></a> **Only set a display context if necessary**
   
@@ -70,7 +72,8 @@ A style guide for the Sightly, the HTML templating system from Adobe Experience 
 
 **[⬆ back to top](#table-of-contents)**
 
-## 4. Block statements <a name='block-statements'></a>
+<a name='block-statements'></a>
+## 4. Block statements
 
   - [4.1](#4.1) <a name='4.1'></a> **Use the “SLY” tag name for all elements that are not part of the markup.**
 
@@ -269,8 +272,9 @@ A style guide for the Sightly, the HTML templating system from Adobe Experience 
     ```
     
 **[⬆ back to top](#table-of-contents)**
-    
-## 5. Client libraries <a name='client-libraries'></a>
+
+<a name='client-libraries'></a>
+## 5. Client libraries
 
   - [5.1](#5.1) <a name='5.1'></a> **Use the resource type (CSS/JS) as the tag name when loading client libraries.**
 
@@ -303,6 +307,7 @@ A style guide for the Sightly, the HTML templating system from Adobe Experience 
     ```
 
 **[⬆ back to top](#table-of-contents)**
+
 
 ## License
 
