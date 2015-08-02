@@ -116,9 +116,9 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     <sly data-sly-include="content.html"></sly>
     ```
     
-  - [4.2](#4.2) <a name='4.2'></a> **Always wrap your component markup inside a data-sly-use statement.**
+  - [4.2](#4.2) <a name='4.2'></a> **Always wrap component markup inside a data-sly-use statement.**
     
-    If the Java or JavaScript Use-API is not working, it won’t try to process the logic inside it.
+    The inner Sightly logic will only be executed if the Java or JavaScript logic works without errors.
 
     ```html
     <!--/* Bad */-->
@@ -200,7 +200,7 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     </ul>
     ```
     
-  - [4.7](#4.7) <a name='4.7'></a> **Always place your block statements after your normal HTML attributes.**
+  - [4.7](#4.7) <a name='4.7'></a> **Always place block statements after the normal HTML attributes.**
 
     ```html
     <!--/* Bad */-->
@@ -246,7 +246,7 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     <p class="event__year">${event.year}</p>
     ```
     
-  - [4.10](#4.10) <a name='4.10'></a> **Always place your unwrap statements at the end of the HTML tag.**
+  - [4.10](#4.10) <a name='4.10'></a> **Always place unwrap statements at the end of the HTML tag.**
 
     ```html
     <!--/* Bad */-->
