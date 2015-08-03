@@ -213,9 +213,25 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     <p class="teaser__text" data-sly-test="${teaser.text}"></p>
     ```
     
-  - [4.8](#4.8) <a name='4.8'></a> **Unwrap all includes, resources and other HTML elements that are not part of the markup.**
+   - [4.8](#4.8) <a name='4.8'></a> **Always use existing HTML elements for your block statements if possible.**
+
+    ```html
+    <!--/* Bad */-->
+    <sly data-sly-test="${!event.isEmpty}" data-sly-unwrap>
+        <section class="event__base">
+            …
+        </section>
+    </sly>
+     
+    <!--/* Good */-->
+    <section class="event__base" data-sly-test="${!event.isEmpty}">
+        …
+    </section>
+    ```
     
-    Elements that are not unwrapped will be rendered as empty elements in the final HTML markup.
+  - [4.9](#4.9) <a name='4.9'></a> **Unwrap all includes, resources and other HTML elements that are not part of the markup.**
+    
+    Elements that are not unwrapped will create unnecessary HTML in the final markup.
 
     ```html
     <!--/* Bad */-->
@@ -235,7 +251,7 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     </sly>
     ```
     
-  - [4.9](#4.9) <a name='4.9'></a> **Try to avoid Sightly element, attribute and text block statements.**
+  - [4.10](#4.10) <a name='4.10'></a> **Try to avoid Sightly element, attribute and text block statements.**
 
     ```html
     <!--/* Bad */-->
@@ -249,7 +265,7 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     <p class="event__year">${event.year}</p>
     ```
     
-  - [4.10](#4.10) <a name='4.10'></a> **Always place unwrap statements at the end of the HTML tag.**
+  - [4.11](#4.11) <a name='4.11'></a> **Always place unwrap statements at the end of the HTML tag.**
 
     ```html
     <!--/* Bad */-->
@@ -261,22 +277,6 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     <sly data-sly-test="${!event.isEmpty}" data-sly-unwrap>
         ...
     </sly>
-    ```
-    
-  - [4.11](#4.11) <a name='4.11'></a> **Always use existing HTML elements for your block statements if possible.**
-
-    ```html
-    <!--/* Bad */-->
-    <sly data-sly-test="${!event.isEmpty}" data-sly-unwrap>
-        <section class="event__base">
-            …
-        </section>
-    </sly>
-     
-    <!--/* Good */-->
-    <section class="event__base" data-sly-test="${!event.isEmpty}">
-        …
-    </section>
     ```
     
 **[⬆ back to top](#table-of-contents)**
