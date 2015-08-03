@@ -217,14 +217,14 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
 
     ```html
     <!--/* Bad */-->
-    <sly data-sly-test="${!event.isEmpty}" data-sly-unwrap>
-        <section class="event__base">
+    <sly data-sly-test="${!teaser.active}" data-sly-unwrap>
+        <section class="teaser">
             …
         </section>
     </sly>
      
     <!--/* Good */-->
-    <section class="event__base" data-sly-test="${!event.isEmpty}">
+    <section class="teaser" data-sly-test="${!teaser.active}">
         …
     </section>
     ```
@@ -269,12 +269,12 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
 
     ```html
     <!--/* Bad */-->
-    <sly data-sly-unwrap data-sly-test="${!event.isEmpty}">
+    <sly data-sly-unwrap data-sly-test="${!teaser.active}">
         ...
     </sly>
      
     <!--/* Good */-->
-    <sly data-sly-test="${!event.isEmpty}" data-sly-unwrap>
+    <sly data-sly-test="${!teaser.active}" data-sly-unwrap>
         ...
     </sly>
     ```
