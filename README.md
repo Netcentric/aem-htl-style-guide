@@ -14,7 +14,7 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
 
   - [1.1](#1.1) <a name='1.1'></a> **Always self close HTML void elements.**
   
-  Although in HTML5 it states that the self closing “/” is optional. It could generate errors in your Sightly script if you don’t add them.&nbsp;Here’s a list of <a href="http://www.w3.org/TR/html-markup/syntax.html#syntax-elements" target="_blank">all void elements</a> in HTML.
+  Although the self-closing "/" is optional in HTML5, not adding them in your Sightly script could result in errors.
   
     ```html
     <!--/* Bad */-->
@@ -52,7 +52,7 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
 
   - [3.1](#3.1) <a name='3.1'></a> **Only set a display context if necessary**
   
-  In most cases the context is determined automatically.
+  In most cases you can leave out the display context, because it is determined automatically.
 
     ```html
     <!--/* Bad */-->
@@ -63,8 +63,6 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     ```
 
   - [3.2](#3.2) <a name='3.2'></a> **Always use the safest display context as possible.**
-  
-    See here a list of all the available <a href="https://github.com/Adobe-Marketing-Cloud/sightly-spec/blob/master/SPECIFICATION.md#121-display-context" target="_blank">display contexts</a>.
 
     ```html
     <!--/* Bad */-->
@@ -73,7 +71,8 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     <!--/* Good */-->
     <p style="color: ${properties.color @ context='styleToken'};"></p>
     ```
-<tag href="${myHrefValue}"></tag>
+    
+    You can find a list of all available display contexts in the <a href="https://github.com/Adobe-Marketing-Cloud/sightly-spec/blob/master/SPECIFICATION.md#121-display-context" target="_blank">Sightly specification</a>.
 
 **[⬆ back to top](#table-of-contents)**
 
@@ -106,7 +105,7 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     </sly>
     ```
     
-    In AEM version 6.1 elements with the tag name “sly” will get unwrapped automatically.
+    In AEM version 6.1 elements with the tag name “sly” will get unwrapped automatically, so there is no need to include it as an HTML attribute.
     
     ```html
     <!--/* Bad */-->
@@ -137,6 +136,8 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     ```
     
   - [4.3](#4.3) <a name='4.3'></a> **Use meaningful identifier names.**
+  
+    This will enhance the readability of your Sightly scripts and and makes it easier for others to understand.
 
     ```html
     <!--/* Bad */-->
@@ -151,6 +152,8 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     ```
     
   - [4.4](#4.4) <a name='4.4'></a> **Use camelcase for identifier names.**
+  
+    Using camelCase will help to increase the readability of your identifiers.
 
     ```html
     <!--/* Bad */-->
@@ -250,12 +253,12 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
 
     ```html
     <!--/* Bad */-->
-    <sly data-sly-test="${!event.isEmpty}" data-sly-unwrap>
+    <sly data-sly-unwrap data-sly-test="${!event.isEmpty}">
         ...
     </sly>
      
     <!--/* Good */-->
-    <sly data-sly-unwrap data-sly-test="${!event.isEmpty}">
+    <sly data-sly-test="${!event.isEmpty}" data-sly-unwrap>
         ...
     </sly>
     ```
