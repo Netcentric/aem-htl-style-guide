@@ -213,7 +213,7 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     <p class="teaser__text" data-sly-test="${teaser.text}"></p>
     ```
     
-   - [4.8](#4.8) <a name='4.8'></a> **Always use existing HTML elements for your block statements if possible.**
+  - [4.8](#4.8) <a name='4.8'></a> **Always use existing HTML elements for your block statements if possible.**
 
     ```html
     <!--/* Bad */-->
