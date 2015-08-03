@@ -252,6 +252,8 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     ```
     
   - [4.10](#4.10) <a name='4.10'></a> **Try to avoid Sightly element, attribute and text block statements.**
+  
+    It's a lot cleaner and explicit writing your Sightly scripts without these block statements.
 
     ```html
     <!--/* Bad */-->
