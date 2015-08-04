@@ -175,7 +175,7 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
         ...
     </section>
      
-    <div class="cq-placeholder" data-sly-test="${!teaser.empty}"></div>
+    <div class="cq-placeholder" data-sly-test="${teaser.empty}"></div>
      
     <!--/* Good */-->
     <section class="teaser" data-sly-test.hasContent="${!teaser.empty}">
