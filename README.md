@@ -59,7 +59,7 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     <a href="${teaser.link @ context = 'uri'}"></a>
  
     <!--/* Good */-->
-    <a href="${teaser.link}></a>
+    <a href="${teaser.link}"></a>
     ```
 
   - [3.2](#3.2) <a name='3.2'></a> **Always use the safest display context as possible.**
