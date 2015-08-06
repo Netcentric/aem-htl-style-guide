@@ -271,7 +271,7 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     
   - [4.11](#4.11) <a name='4.11'></a> **Always place unwrap statements at the end of the HTML tag.**
   
-    This rule only applies if you are using AEM 6.0 or when you add [Client libraries](#client-libraries) to your page.
+    This rule only applies if you are using AEM 6.0 or when you add <a href="#client-libraries">Client libraries</a>  to your page.
 
     ```html
     <!--/* Bad */-->
