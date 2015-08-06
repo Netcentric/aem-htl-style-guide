@@ -79,7 +79,9 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
 <a name='block-statements'></a>
 ## 4. Block statements
 
-  - [4.1](#4.1) <a name='4.1'></a> **Use the “SLY” tag name for all elements that are not part of the markup.**
+  - [4.1](#4.1) <a name='4.1'></a> **Use the SLY tag name for all elements that are not part of the markup.**
+  
+    HTML elements with the tag name SLY are automatically getting unwrapped.
 
     ```html
     <!--/* Bad */-->
@@ -94,25 +96,25 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     </div>
      
     <!--/* Good */-->
-    <sly data-sly-include="content.html" data-sly-unwrap></sly>
+    <sly data-sly-include="content.html"></sly>
      
     <!--/* Good */-->
-    <sly data-sly-resource="${item @ selectors = 'event'}" data-sly-unwrap></sly>
+    <sly data-sly-resource="${item @ selectors = 'event'}"></sly>
      
     <!--/* Good */-->
-    <sly data-sly-test="${event.hasDate}" data-sly-unwrap>
+    <sly data-sly-test="${event.hasDate}">
         ...
     </sly>
     ```
     
-    In AEM version 6.1 elements with the tag name “sly” will get unwrapped automatically, so there is no need to include it as an HTML attribute.
+    **IMPORTANT** - The SLY element will not automatically unwrap itself if you use AEM 6.0. In that case, you still have to add the "data-sly-unwrap" attribute.
     
     ```html
-    <!--/* Bad */-->
-    <sly data-sly-include="content.html" data-sly-unwrap></sly>
-     
-    <!--/* Good */-->
+    <!--/* Bad - AEM 6.0 */-->
     <sly data-sly-include="content.html"></sly>
+     
+    <!--/* Good - AEM 6.0 */-->
+    <sly data-sly-include="content.html" data-sly-unwrap></sly>
     ```
     
   - [4.2](#4.2) <a name='4.2'></a> **Always wrap component markup inside a data-sly-use statement.**
@@ -121,14 +123,14 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
 
     ```html
     <!--/* Bad */-->
-    <sly data-sly-use.teaser="com.example.TeaserComponent" data-sly-unwrap></sly>
+    <sly data-sly-use.teaser="com.example.TeaserComponent"></sly>
      
     <div class="teaser">
         <a class="teaser__link" href="${teaser.link}"></a>
     </div>
      
     <!--/* Good */-->
-    <sly data-sly-use.teaser="com.example.TeaserComponent" data-sly-unwrap>
+    <sly data-sly-use.teaser="com.example.TeaserComponent">
         <div class="teaser">
             <a class="teaser__link" href="${teaser.link}"></a>
         </div>
@@ -141,12 +143,12 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
 
     ```html
     <!--/* Bad */-->
-    <sly data-sly-use.comp="com.example.TeaserComponent" data-sly-unwrap>
+    <sly data-sly-use.comp="com.example.TeaserComponent">
         ...
     </sly>
      
     <!--/* Good */-->
-    <sly data-sly-use.teaser="com.example.TeaserComponent" data-sly-unwrap>
+    <sly data-sly-use.teaser="com.example.TeaserComponent">
         ...
     </sly>
     ```
@@ -157,12 +159,12 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
 
     ```html
     <!--/* Bad */-->
-    <sly data-sly-use.mediagallery="com.example.MediaGallery" data-sly-unwrap>
+    <sly data-sly-use.mediagallery="com.example.MediaGallery">
         ...
     </sly>
      
     <!--/* Good */-->
-    <sly data-sly-use.mediaGallery="com.example.MediaGallery" data-sly-unwrap>
+    <sly data-sly-use.mediaGallery="com.example.MediaGallery">
         ...
     </sly>
     ```
@@ -217,7 +219,7 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
 
     ```html
     <!--/* Bad */-->
-    <sly data-sly-test="${!teaser.active}" data-sly-unwrap>
+    <sly data-sly-test="${!teaser.active}">
         <section class="teaser">
             …
         </section>
@@ -243,10 +245,10 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     </div>
      
     <!--/* Good */-->
-    <sly data-sly-include="content.html" data-sly-unwrap></sly>
+    <sly data-sly-include="content.html"></sly>
      
     <!--/* Good */-->
-    <sly data-sly-resource="${item @ selectors='teaser'}" data-sly-test="${teaser.hasImage}" data-sly-unwrap>
+    <sly data-sly-resource="${item @ selectors='teaser'}" data-sly-test="${teaser.hasImage}">
         ...
     </sly>
     ```
@@ -268,6 +270,8 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     ```
     
   - [4.11](#4.11) <a name='4.11'></a> **Always place unwrap statements at the end of the HTML tag.**
+  
+    This rule only applies if you are using AEM 6.0 or when you add [Client libraries](#client-libraries) to your page.
 
     ```html
     <!--/* Bad */-->
@@ -287,6 +291,8 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
 ## 5. Client libraries
 
   - [5.1](#5.1) <a name='5.1'></a> **Use the resource type (CSS/JS) as the tag name when loading client libraries.**
+  
+    This will make it very clear what will get rendered by he clientlib helper template library.
 
     ```html
     <!--/* Bad */-->
