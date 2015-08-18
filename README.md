@@ -292,6 +292,26 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
         ...
     </sly>
     ```
+  
+  - [4.12](#4.12) <a name='4.12'></a> **Always place data-sly-use only in your root element.**
+    
+    Since data-sly-use identifiers are always global (http://docs.adobe.com/docs/en/aem/6-0/develop/sightly/use-api-in-java.html#Local%20identifier), these attributes should only be placed in the root element. That way one can easily see name clashes and also it prevents initializing the same object twice.
+    
+     ```html
+    <!--/* Bad */-->
+    <div>
+    	<div>
+    		<p data-sly-use.teaser-model="com.example.Teaser">...<p>
+        <div>
+    </div>
+     
+    <!--/* Good */-->
+    <div data-sly-use.teaser-model="com.example.Teaser">
+        <div>
+        	<p>...</p>
+       </div>
+    </div>
+    ```
     
 **[⬆ back to top](#table-of-contents)**
 
