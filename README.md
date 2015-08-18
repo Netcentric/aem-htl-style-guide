@@ -24,10 +24,10 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     <link rel="stylesheet" type="text/css" href="styles.css">
      
     <!--/* Good */-->
-    <input type="text" name="name" />
-    <img src="smiley.gif" alt="Smiley face" height="42" width="42" />
-    <meta name="author" content="Erik Grijzen" />
-    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <input type="text" name="name"/>
+    <img src="smiley.gif" alt="Smiley face" height="42" width="42"/>
+    <meta name="author" content="Erik Grijzen"/>
+    <link rel="stylesheet" type="text/css" href="styles.css"/>
     ```
 
 **[⬆ back to top](#table-of-contents)**
@@ -81,7 +81,7 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
 
   - [4.1](#4.1) <a name='4.1'></a> **Use the SLY tag name for all elements that are not part of the markup.**
   
-    HTML elements with the tag name SLY are automatically getting unwrapped.
+    HTML elements with the tag name SLY are automatically getting unwrapped. For empty SLY elements, use the self-closing "/" form.
 
     ```html
     <!--/* Bad */-->
@@ -96,10 +96,10 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     </div>
      
     <!--/* Good */-->
-    <sly data-sly-include="content.html"></sly>
+    <sly data-sly-include="content.html"/>
      
     <!--/* Good */-->
-    <sly data-sly-resource="${item @ selectors = 'event'}"></sly>
+    <sly data-sly-resource="${item @ selectors = 'event'}"/>
      
     <!--/* Good */-->
     <sly data-sly-test="${event.hasDate}">
@@ -107,14 +107,14 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     </sly>
     ```
     
-    **IMPORTANT** - The SLY element will not automatically unwrap itself if you use AEM 6.0. In that case, you still have to add the "data-sly-unwrap" attribute.
+    **IMPORTANT** - The SLY element will not automatically unwrap itself if you use Sightly 1.0 (AEM 6.0). In that case, you still have to add the "data-sly-unwrap" attribute.
     
     ```html
-    <!--/* Bad - AEM 6.0 */-->
-    <sly data-sly-include="content.html"></sly>
+    <!--/* Bad - Sightly 1.0 */-->
+    <sly data-sly-include="content.html"/>
      
-    <!--/* Good - AEM 6.0 */-->
-    <sly data-sly-include="content.html" data-sly-unwrap></sly>
+    <!--/* Good - Sightly 1.0 */-->
+    <sly data-sly-include="content.html" data-sly-unwrap/>
     ```
     
   - [4.2](#4.2) <a name='4.2'></a> **Always wrap component markup inside a data-sly-use statement.**
@@ -245,12 +245,10 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     </div>
      
     <!--/* Good */-->
-    <sly data-sly-include="content.html"></sly>
+    <sly data-sly-include="content.html"/>
      
     <!--/* Good */-->
-    <sly data-sly-resource="${item @ selectors='teaser'}" data-sly-test="${teaser.hasImage}">
-        ...
-    </sly>
+    <sly data-sly-resource="${item @ selectors='teaser'}" data-sly-test="${teaser.hasImage}"/>
     ```
     
   - [4.10](#4.10) <a name='4.10'></a> **Try to avoid the element, attribute and text block statements.**
@@ -271,7 +269,7 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     
   - [4.11](#4.11) <a name='4.11'></a> **Always place unwrap statements at the end of the HTML tag.**
   
-    This rule only applies if you are using AEM 6.0 or when you add <a href="#client-libraries">Client libraries</a>  to your page.
+    This rule only applies if you are using Sightly 1.0 (AEM 6.0) or when you add <a href="#client-libraries">Client libraries</a>  to your page.
 
     ```html
     <!--/* Bad */-->
@@ -290,35 +288,17 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
 <a name='client-libraries'></a>
 ## 5. Client libraries
 
-  - [5.1](#5.1) <a name='5.1'></a> **Use the resource type (CSS/JS) as the tag name when loading client libraries.**
-  
-    This will make it very clear what will get rendered by he clientlib helper template library.
+  - [5.1](#5.1) <a name='5.1'></a> **For client libraries, also use a SLY element (combined with `data-sly-unwrap` on Sightly 1.0).**
 
     ```html
-    <!--/* Bad */-->
-    <head data-sly-use.clientlib="${'/libs/granite/sightly/templates/clientlib.html'}">
-        <div data-sly-call="${clientLib.css @ categories='project.publish'}" data-sly-unwrap></div>
-        <div data-sly-call="${clientLib.css @ categories='project.author'}" data-sly-test="${!wcmmode.disabled}" data-sly-unwrap></div>
+    <head data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html">
+        <sly data-sly-call="${clientLib.css @ categories='project.publish'}"/>
+        <sly data-sly-call="${clientLib.css @ categories='project.author'}" data-sly-test="${!wcmmode.disabled}"/>
     </head>
     <body>
-     
         ...
-        
-        <div data-sly-call="${clientLib.js @ categories='project.publish'}" data-sly-unwrap></div>
-        <div data-sly-call="${clientLib.js @ categories='project.author'}" data-sly-test="${!wcmmode.disabled}" data-sly-unwrap></div>
-    <body>
-     
-    <!--/* Good */-->
-    <head data-sly-use.clientlib="${'/libs/granite/sightly/templates/clientlib.html'}">
-        <css data-sly-call="${clientLib.css @ categories='project.publish'}" data-sly-unwrap></css>
-        <css data-sly-call="${clientLib.css @ categories='project.author'}" data-sly-test="${!wcmmode.disabled}" data-sly-unwrap></css>
-    </head>
-    <body>
-     
-        ...
-         
-        <js data-sly-call="${clientLib.js @ categories='project.publish'}" data-sly-unwrap></js>
-        <js data-sly-call="${clientLib.js @ categories='project.author'}" data-sly-test="${!wcmmode.disabled}" data-sly-unwrap></js>
+        <sly data-sly-call="${clientLib.js @ categories='project.publish'}"/>
+        <sly data-sly-call="${clientLib.js @ categories='project.author'}" data-sly-test="${!wcmmode.disabled}"/>
     </body>
     ```
 
