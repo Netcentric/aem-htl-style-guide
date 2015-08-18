@@ -161,18 +161,18 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     </sly>
     ```
     
-  - [4.4](#4.4) <a name='4.4'></a> **Use camelcase for identifier names.**
+  - [4.4](#4.4) <a name='4.4'></a> **Use lower case for identifier names.**
   
-    Using camelCase will help to increase the readability of your identifiers.
+    Using lower case characters only will help to find identifiers in your code which are referenced from Sightly (e.g. in warnings). Although this might be harder to read than e.g. camel-case it is necessary because Sightly is internally converting all identifiers to lower-case.
 
     ```html
     <!--/* Bad */-->
-    <sly data-sly-use.mediagallery="com.example.MediaGallery">
+    <sly data-sly-use.mediaGallery="com.example.MediaGallery">
         ...
     </sly>
      
     <!--/* Good */-->
-    <sly data-sly-use.mediaGallery="com.example.MediaGallery">
+    <sly data-sly-use.mediagallery="com.example.MediaGallery">
         ...
     </sly>
     ```
