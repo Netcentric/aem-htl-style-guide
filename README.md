@@ -122,18 +122,24 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
 
     ```html
     <!--/* Bad */-->
-    <sly data-sly-use.teaser="com.example.TeaserComponent"></sly>
+    <sly data-sly-use.teaser="com.example.TeaserComponent"/>
      
-    <div class="teaser">
-        <a class="teaser__link" href="${teaser.link}"></a>
-    </div>
+    <section class="teaser">
+        <h2>${teaser.title}</h2>
+        <p>${teaser.text}</a>
+    </section>
+    
+    <!--/* Bad */-->
+    <section class="teaser">
+        <h2 data-sly-use.teaser="com.example.TeaserComponent">${teaser.title}</h2>
+        <p>${teaser.text}</a>
+    </section>
      
     <!--/* Good */-->
-    <sly data-sly-use.teaser="com.example.TeaserComponent">
-        <div class="teaser">
-            <a class="teaser__link" href="${teaser.link}"></a>
-        </div>
-    </sly>
+    <section class="teaser" data-sly-use.teaser="com.example.TeaserComponent">
+        <h2>${teaser.title}</h2>
+        <p>${teaser.text}</a>
+    </section>
     ```
     
   - [4.3](#4.3) <a name='4.3'></a> **Use meaningful identifier names.**
