@@ -7,7 +7,6 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
   2. [Comments](#comments)
   3. [Expression language](#expression-language)
   4. [Block statements](#block-statements)
-  5. [Client libraries](#client-libraries)
 
 <a name='html'></a>
 ## 1. HTML
@@ -81,7 +80,7 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
 
   - [4.1](#4.1) <a name='4.1'></a> **Use the SLY tag name for all elements that are not part of the markup.**
   
-    HTML elements with the tag name SLY are automatically getting unwrapped. For empty SLY elements, use the self-closing "/" form.
+    HTML elements with the tag name SLY are automatically getting unwrapped and will not be part of the final markup. For empty SLY elements, use the self-closing "/" form.
 
     ```html
     <!--/* Bad */-->
@@ -231,27 +230,7 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     </section>
     ```
     
-  - [4.9](#4.9) <a name='4.9'></a> **Unwrap all includes, resources and other HTML elements that are not part of the markup.**
-    
-    Elements that are not unwrapped will create unnecessary HTML in the final markup.
-
-    ```html
-    <!--/* Bad */-->
-    <div data-sly-include="content.html"></div>
-     
-    <!--/* Bad */-->
-    <div data-sly-test="${teaser.hasImage}">
-        <div data-sly-resource="${item @ selectors='teaser'}"></div>
-    </div>
-     
-    <!--/* Good */-->
-    <sly data-sly-include="content.html"/>
-     
-    <!--/* Good */-->
-    <sly data-sly-resource="${item @ selectors='teaser'}" data-sly-test="${teaser.hasImage}"/>
-    ```
-    
-  - [4.10](#4.10) <a name='4.10'></a> **Try to avoid the element, attribute and text block statements.**
+  - [4.9](#4.10) <a name='4.10'></a> **Try to avoid the element, attribute and text block statements.**
   
     It's a lot cleaner and explicit writing your Sightly scripts without these block statements.
 
@@ -267,41 +246,6 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     <p class="event__year">${event.year}</p>
     ```
     
-  - [4.11](#4.11) <a name='4.11'></a> **Always place unwrap statements at the end of the HTML tag.**
-  
-    This rule only applies if you are using Sightly 1.0 (AEM 6.0) or when you add <a href="#client-libraries">Client libraries</a>  to your page.
-
-    ```html
-    <!--/* Bad */-->
-    <sly data-sly-unwrap data-sly-test="${!teaser.active}">
-        ...
-    </sly>
-     
-    <!--/* Good */-->
-    <sly data-sly-test="${!teaser.active}" data-sly-unwrap>
-        ...
-    </sly>
-    ```
-    
-**[⬆ back to top](#table-of-contents)**
-
-<a name='client-libraries'></a>
-## 5. Client libraries
-
-  - [5.1](#5.1) <a name='5.1'></a> **For client libraries, also use a SLY element (combined with `data-sly-unwrap` on Sightly 1.0).**
-
-    ```html
-    <head data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html">
-        <sly data-sly-call="${clientLib.css @ categories='project.publish'}"/>
-        <sly data-sly-call="${clientLib.css @ categories='project.author'}" data-sly-test="${!wcmmode.disabled}"/>
-    </head>
-    <body>
-        ...
-        <sly data-sly-call="${clientLib.js @ categories='project.publish'}"/>
-        <sly data-sly-call="${clientLib.js @ categories='project.author'}" data-sly-test="${!wcmmode.disabled}"/>
-    </body>
-    ```
-
 **[⬆ back to top](#table-of-contents)**
 
 
