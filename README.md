@@ -148,6 +148,7 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     * for JavaScript/Java objects: any name except the ones listed in http://docs.adobe.com/docs/en/aem/6-1/develop/sightly/global-objects.html
     * for template libraries: the prefix **lib-** followed by an arbitrary name
     * for template names: the prefix **template-** followed by an arbitrary name
+    
     This will enhance the readability of your Sightly scripts and and makes it easier for others to understand.
 
     ```html
