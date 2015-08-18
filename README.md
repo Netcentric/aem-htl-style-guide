@@ -137,19 +137,26 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     </sly>
     ```
     
-  - [4.3](#4.3) <a name='4.3'></a> **Use meaningful identifier names.**
+  - [4.3](#4.3) <a name='4.3'></a> **Use naming conventions for identifiers.**
   
+    Sightly knows three types of identifiers:
+    * defined in `data-sly-use` for a JavaScript/Java object
+    * defined in `data-sly-use` for a template library
+    * defined in `data-sly-template` for template names
+    
+    To be able to distinguish those identifiers, the following naming conventions should be used:
+    * for JavaScript/Java objects: any name except the ones listed in http://docs.adobe.com/docs/en/aem/6-1/develop/sightly/global-objects.html
+    * for template libraries: the prefix **lib-** followed by an arbitrary name
+    * for template names: the prefix **template-** followed by an arbitrary name
     This will enhance the readability of your Sightly scripts and and makes it easier for others to understand.
 
     ```html
-    <!--/* Bad */-->
-    <sly data-sly-use.comp="com.example.TeaserComponent">
-        ...
-    </sly>
-     
-    <!--/* Good */-->
-    <sly data-sly-use.teaser="com.example.TeaserComponent">
-        ...
+    <!--/* Java-object and template library */-->
+    <sly data-sly-use.teaser="com.example.TeaserComponent" data-sly-use.lib-teaser="teaser-templates.html">
+    	<!--/* template name> */-->
+        <sly data-sly-template.template-teaser1>...</sly>
+        <sly data-sly-call="template-teaser1"></sly>
+        <sly data-sly-call="teaser-templates.teaser3"></sly>
     </sly>
     ```
     
