@@ -136,43 +136,35 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     </div>
     ```
     
-  - [4.3](#4.3) <a name='4.3'></a> **Use naming conventions for identifiers.**
+  - [4.3](#4.3) <a name='4.3'></a> **Use meaningful identifier names.**
   
-    Sightly knows the following types of identifiers:
-    * defined in `data-sly-use` for a template library
-    * defined in `data-sly-template` for template names
-    * defined in `data-sly-use` for a JavaScript/Java object variable
-    * defined in `data-sly-list` for a list entry variable
-    * defined in `data-sly-test` for a test result variable
-    
-    To be able to distinguish the former two identifiers, the following naming conventions should be used:
-    * for template libraries: the prefix **lib-** followed by an arbitrary name
-    * for template names: the prefix **template-** followed by an arbitrary name
-    * for all other variable identifiers any name except the ones listed in http://docs.adobe.com/docs/en/aem/6-1/develop/sightly/global-objects.html can be used.
     This will enhance the readability of your Sightly scripts and and makes it easier for others to understand.
 
     ```html
-    <!--/* Java-object and template library */-->
-    <sly data-sly-use.teaser="com.example.TeaserComponent" data-sly-use.lib-teaser="teaser-templates.html">
-    	<!--/* template name> */-->
-        <sly data-sly-template.template-teaser1>...</sly>
-        <sly data-sly-call="template-teaser1"></sly>
-        <sly data-sly-call="lib-teaser.teaser3"></sly>
-    </sly>
-    ```
-    
-  - [4.4](#4.4) <a name='4.4'></a> **Use lower case for identifier names.**
-  
-    Using lower case characters only will help to find identifiers in your code which are referenced from Sightly (e.g. in warnings). Although this might be harder to read than e.g. camel-case it is necessary because Sightly is internally converting all identifiers to lower-case.
-
-    ```html
     <!--/* Bad */-->
-    <sly data-sly-use.mediaGallery="com.example.MediaGallery">
+    <sly data-sly-use.comp="com.example.TeaserComponent">
         ...
     </sly>
      
     <!--/* Good */-->
+    <sly data-sly-use.teaser="com.example.TeaserComponent">
+        ...
+    </sly>
+    ```
+    
+  - [4.4](#4.4) <a name='4.4'></a> **Use camelcase for identifier names.**
+  
+    Using camelCase will help to increase the readability of your identifiers. Notice though that
+    Sightly will internally only use (and log) lowercase identifiers. Also dashes are not allowed for identifiers.
+
+    ```html
+    <!--/* Bad */-->
     <sly data-sly-use.mediagallery="com.example.MediaGallery">
+        ...
+    </sly>
+     
+    <!--/* Good */-->
+    <sly data-sly-use.mediaGallery="com.example.MediaGallery">
         ...
     </sly>
     ```
