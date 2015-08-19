@@ -50,7 +50,23 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
         <h2 data-teaser-config="${teaser.jsonConfig}">${teaser.title}</h2>
     </section>
     ```
+
+  - [1.3](#1.3) <a name='1.3'></a> **Don't write unecessary expressions.**
   
+  It might sound obvious, but an expression with just a string inside equals just that string.
+
+      ```html
+    <!--/* Bad */-->
+    <sly data-sly-use.clientlib="${'/libs/granite/sightly/templates/clientlib.html'}">
+        ...
+    </sly>
+ 
+    <!--/* Good */-->
+    <sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html">
+        ...
+    </sly>
+    ```
+
 **[⬆ back to top](#table-of-contents)**
 
 <a name='comments'></a>
