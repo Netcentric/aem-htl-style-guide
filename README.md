@@ -55,7 +55,7 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
   
   It might sound obvious, but an expression with just a string inside equals just that string.
 
-      ```html
+    ```html
     <!--/* Bad */-->
     <sly data-sly-use.clientlib="${'/libs/granite/sightly/templates/clientlib.html'}">
         ...
