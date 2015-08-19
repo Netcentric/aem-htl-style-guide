@@ -7,7 +7,6 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
   2. [Comments](#comments)
   3. [Expression language](#expression-language)
   4. [Block statements](#block-statements)
-  5. [Client libraries](#client-libraries)
 
 <a name='html'></a>
 ## 1. HTML
@@ -24,10 +23,10 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     <link rel="stylesheet" type="text/css" href="styles.css">
      
     <!--/* Good */-->
-    <input type="text" name="name" />
-    <img src="smiley.gif" alt="Smiley face" height="42" width="42" />
-    <meta name="author" content="Erik Grijzen" />
-    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <input type="text" name="name"/>
+    <img src="smiley.gif" alt="Smiley face" height="42" width="42"/>
+    <meta name="author" content="Erik Grijzen"/>
+    <link rel="stylesheet" type="text/css" href="styles.css"/>
     ```
 
 **[⬆ back to top](#table-of-contents)**
@@ -81,7 +80,7 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
 
   - [4.1](#4.1) <a name='4.1'></a> **Use the SLY tag name for all elements that are not part of the markup.**
   
-    HTML elements with the tag name SLY are automatically getting unwrapped.
+    HTML elements with the tag name SLY are automatically getting unwrapped and will not be part of the final markup. For empty SLY elements, use the self-closing "/" form.
 
     ```html
     <!--/* Bad */-->
@@ -96,10 +95,10 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     </div>
      
     <!--/* Good */-->
-    <sly data-sly-include="content.html"></sly>
+    <sly data-sly-include="content.html"/>
      
     <!--/* Good */-->
-    <sly data-sly-resource="${item @ selectors = 'event'}"></sly>
+    <sly data-sly-resource="${item @ selectors = 'event'}"/>
      
     <!--/* Good */-->
     <sly data-sly-test="${event.hasDate}">
@@ -107,34 +106,34 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     </sly>
     ```
     
-    **IMPORTANT** - The SLY element will not automatically unwrap itself if you use AEM 6.0. In that case, you still have to add the "data-sly-unwrap" attribute.
+    **IMPORTANT** - The SLY element will not automatically unwrap itself if you use Sightly 1.0 (AEM 6.0). In that case, you still have to add the "data-sly-unwrap" attribute.
     
     ```html
-    <!--/* Bad - AEM 6.0 */-->
-    <sly data-sly-include="content.html"></sly>
+    <!--/* Bad - Sightly 1.0 */-->
+    <sly data-sly-include="content.html"/>
      
-    <!--/* Good - AEM 6.0 */-->
-    <sly data-sly-include="content.html" data-sly-unwrap></sly>
+    <!--/* Good - Sightly 1.0 */-->
+    <sly data-sly-include="content.html" data-sly-unwrap/>
     ```
     
-  - [4.2](#4.2) <a name='4.2'></a> **Always wrap component markup inside a data-sly-use statement.**
+  - [4.2](#4.2) <a name='4.2'></a> **Always place data-sly-use only in your root element.**
     
-    The inner Sightly logic will only be executed if the Java or JavaScript logic works without errors.
-
-    ```html
+    Since data-sly-use identifiers are always global (http://docs.adobe.com/docs/en/aem/6-0/develop/sightly/use-api-in-java.html#Local%20identifier), these attributes should only be placed in the root element. That way one can easily see name clashes and also it prevents initializing the same object twice.
+    
+     ```html
     <!--/* Bad */-->
-    <sly data-sly-use.teaser="com.example.TeaserComponent"></sly>
-     
-    <div class="teaser">
-        <a class="teaser__link" href="${teaser.link}"></a>
+    <div>
+    	<div>
+    		<p data-sly-use.teaser-model="com.example.Teaser">...<p>
+        <div>
     </div>
      
     <!--/* Good */-->
-    <sly data-sly-use.teaser="com.example.TeaserComponent">
-        <div class="teaser">
-            <a class="teaser__link" href="${teaser.link}"></a>
-        </div>
-    </sly>
+    <div data-sly-use.teaser-model="com.example.Teaser">
+        <div>
+        	<p>...</p>
+       </div>
+    </div>
     ```
     
   - [4.3](#4.3) <a name='4.3'></a> **Use naming conventions for identifiers.**
@@ -240,29 +239,7 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     </section>
     ```
     
-  - [4.9](#4.9) <a name='4.9'></a> **Unwrap all includes, resources and other HTML elements that are not part of the markup.**
-    
-    Elements that are not unwrapped will create unnecessary HTML in the final markup.
-
-    ```html
-    <!--/* Bad */-->
-    <div data-sly-include="content.html"></div>
-     
-    <!--/* Bad */-->
-    <div data-sly-test="${teaser.hasImage}">
-        <div data-sly-resource="${item @ selectors='teaser'}"></div>
-    </div>
-     
-    <!--/* Good */-->
-    <sly data-sly-include="content.html"></sly>
-     
-    <!--/* Good */-->
-    <sly data-sly-resource="${item @ selectors='teaser'}" data-sly-test="${teaser.hasImage}">
-        ...
-    </sly>
-    ```
-    
-  - [4.10](#4.10) <a name='4.10'></a> **Try to avoid the element, attribute and text block statements.**
+  - [4.9](#4.10) <a name='4.10'></a> **Try to avoid the element, attribute and text block statements.**
   
     It's a lot cleaner and explicit writing your Sightly scripts without these block statements.
 
@@ -278,79 +255,6 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     <p class="event__year">${event.year}</p>
     ```
     
-  - [4.11](#4.11) <a name='4.11'></a> **Always place unwrap statements at the end of the HTML tag.**
-  
-    This rule only applies if you are using AEM 6.0 or when you add <a href="#client-libraries">Client libraries</a>  to your page.
-
-    ```html
-    <!--/* Bad */-->
-    <sly data-sly-unwrap data-sly-test="${!teaser.active}">
-        ...
-    </sly>
-     
-    <!--/* Good */-->
-    <sly data-sly-test="${!teaser.active}" data-sly-unwrap>
-        ...
-    </sly>
-    ```
-  
-  - [4.12](#4.12) <a name='4.12'></a> **Always place data-sly-use only in your root element.**
-    
-    Since data-sly-use identifiers are always global (http://docs.adobe.com/docs/en/aem/6-0/develop/sightly/use-api-in-java.html#Local%20identifier), these attributes should only be placed in the root element. That way one can easily see name clashes and also it prevents initializing the same object twice.
-    
-     ```html
-    <!--/* Bad */-->
-    <div>
-    	<div>
-    		<p data-sly-use.teaser-model="com.example.Teaser">...<p>
-        <div>
-    </div>
-     
-    <!--/* Good */-->
-    <div data-sly-use.teaser-model="com.example.Teaser">
-        <div>
-        	<p>...</p>
-       </div>
-    </div>
-    ```
-    
-**[⬆ back to top](#table-of-contents)**
-
-<a name='client-libraries'></a>
-## 5. Client libraries
-
-  - [5.1](#5.1) <a name='5.1'></a> **Use the resource type (CSS/JS) as the tag name when loading client libraries.**
-  
-    This will make it very clear what will get rendered by he clientlib helper template library.
-
-    ```html
-    <!--/* Bad */-->
-    <head data-sly-use.clientlib="${'/libs/granite/sightly/templates/clientlib.html'}">
-        <div data-sly-call="${clientLib.css @ categories='project.publish'}" data-sly-unwrap></div>
-        <div data-sly-call="${clientLib.css @ categories='project.author'}" data-sly-test="${!wcmmode.disabled}" data-sly-unwrap></div>
-    </head>
-    <body>
-     
-        ...
-        
-        <div data-sly-call="${clientLib.js @ categories='project.publish'}" data-sly-unwrap></div>
-        <div data-sly-call="${clientLib.js @ categories='project.author'}" data-sly-test="${!wcmmode.disabled}" data-sly-unwrap></div>
-    <body>
-     
-    <!--/* Good */-->
-    <head data-sly-use.clientlib="${'/libs/granite/sightly/templates/clientlib.html'}">
-        <css data-sly-call="${clientLib.css @ categories='project.publish'}" data-sly-unwrap></css>
-        <css data-sly-call="${clientLib.css @ categories='project.author'}" data-sly-test="${!wcmmode.disabled}" data-sly-unwrap></css>
-    </head>
-    <body>
-     
-        ...
-         
-        <js data-sly-call="${clientLib.js @ categories='project.publish'}" data-sly-unwrap></js>
-        <js data-sly-call="${clientLib.js @ categories='project.author'}" data-sly-test="${!wcmmode.disabled}" data-sly-unwrap></js>
-    </body>
-    ```
-
 **[⬆ back to top](#table-of-contents)**
 
 
