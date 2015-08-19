@@ -31,7 +31,7 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
 
   - [1.2](#1.2) <a name='1.2'></a> **Avoid inline JavaScript or CSS.**
   
-  Sightly is an HTML domain-specific template language and therefore makes little sense to be used to generate inline JavaScript or CSS. Within those contexts, only expressions can be used, and block statements are disabled on purpose. The Use-API should be used instad to construct the JSON data, which can then easily be passed to the client by writing that JSON into a data attribute.
+  Sightly is an HTML domain-specific template language and therefore makes little sense to be used to generate inline JavaScript or CSS. Within those contexts, only expressions can be used but the context always has to be specified explicitly, and block statements are impossible to use as HTML elements have no meaning there. Therefore, the Use-API should be used instad to construct the JSON data, which can then easily be passed to the client by writing that JSON into a data attribute.
   
     ```html
     <!--/* Bad */-->
@@ -40,7 +40,7 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
         <script>
             var topTeaserConfig = {
                 skin: "${teaser.skin @ context='scriptString'}",
-                animationSpeed: "${teaser.animationSpeed @ context='scriptString'}"
+                animationSpeed: ${teaser.animationSpeed @ context='number'}
             }
         </script>
     </section>
