@@ -31,9 +31,7 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
 
   - [1.2](#1.2) <a name='1.2'></a> **Avoid inline JavaScript or CSS.**
   
-  In order to encourage keeping a clean separation of concerns, Sightly has by design some limitations for inline JavaScript or CSS:
-  * Because Sightly doesn't parse JavaScript or CSS, and therefore cannot automatically define the corresponding escaping, all expressions written there must provide an explicit `context` option.
-  * Because the HTML grammar ignores elements located inside a `<script>` or `<style>` elements, no block statement can be used within them.
+  In order to encourage keeping a clean separation of concerns, Sightly has by design some limitations for inline JavaScript or CSS. First, because Sightly doesn't parse JavaScript or CSS, and therefore cannot automatically define the corresponding escaping, all expressions written there must provide an explicit `context` option. Then, because the HTML grammar ignores elements located inside a `<script>` or `<style>` elements, no block statement can be used within them.
   
   Therefore JavaScript and CSS code should be placed instead into corresponding `.js` and `.css` files. Data attributes are the easiest way to communicate values to JavaScript, and class names are the best way to trigger specific styles.
 
