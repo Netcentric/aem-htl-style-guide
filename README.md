@@ -58,22 +58,6 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     </section>
     ```
 
-  - [1.3](#1.3) <a name='1.3'></a> **Don't write unecessary expressions.**
-  
-  It might sound obvious, but an expression with just a string inside equals just that string.
-
-    ```html
-    <!--/* Bad */-->
-    <sly data-sly-use.clientlib="${'/libs/granite/sightly/templates/clientlib.html'}">
-        ...
-    </sly>
- 
-    <!--/* Good */-->
-    <sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html">
-        ...
-    </sly>
-    ```
-
 **[⬆ back to top](#table-of-contents)**
 
 <a name='comments'></a>
@@ -118,6 +102,22 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     
     You can find a list of all available display contexts in the <a href="https://github.com/Adobe-Marketing-Cloud/sightly-spec/blob/master/SPECIFICATION.md#121-display-context" target="_blank">Sightly specification</a>.
 
+  - [3.3](#3.3) <a name='3.3'></a> **Don't write unecessary expressions.**
+  
+  It might sound obvious, but an expression with just a string inside equals just that string.
+
+    ```html
+    <!--/* Bad */-->
+    <sly data-sly-use.clientlib="${'/libs/granite/sightly/templates/clientlib.html'}">
+        ...
+    </sly>
+ 
+    <!--/* Good */-->
+    <sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html">
+        ...
+    </sly>
+    ```
+  
 **[⬆ back to top](#table-of-contents)**
 
 <a name='block-statements'></a>
