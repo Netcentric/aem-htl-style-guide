@@ -90,17 +90,39 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     <a href="${teaser.link}"></a>
     ```
 
-  - [3.2](#3.2) <a name='3.2'></a> **Always use the safest display context as possible.**
+  - [3.2](#3.2) <a name='3.2'></a> **Always use the safest possible display context.**
+
+  From the following list of contexts, always choose the one closest to the top that fits your needs:  
+  `number`: For whole numbers (in HTML, JS or CSS)  
+  `uri`: For links and paths (in HTML, JS or CSS, used by default in `src` and `href` attributes)  
+  `elementName`: For HTML element names (used by default by `data-sly-element`)  
+  `attributeName`: For HTML attribute names (used by default with `data-sly-attribute`)  
+  `styleToken`: For JavaScript identifiers and keywords  
+  `scriptToken`: For CSS identifiers and keywords  
+  `scriptString`: For text within JavaScript strings  
+  `styleString`: For text within CSS strings  
+  `attribute`: For HTML attribute values (used by default in attribute values)  
+  `text`: For HTML text content (used by default for any content)  
+  `html`: For HTML markup (it filters out all elements and attributes that could be dangerous)  
+  `unsafe`: Unescaped and unfiltered direct output  
 
     ```html
     <!--/* Bad */-->
-    <p style="color: ${properties.color @ context='unsafe'};"></p>
+    <section class="teaser" data-sly-use.teaser="com.example.TeaserComponent">
+        <div onclick="${teaser.clickHandler @ context='unsafe'}" style="color: ${teaser.color @ context='unsafe'};">
+            ${teaser.htmlContent @ context='unsafe'}
+        </div>
+        <a href="${teaser.moreJsLink @ context='unsafe'}">${teaser.moreText}</a>
+    </section>
  
     <!--/* Good */-->
-    <p style="color: ${properties.color @ context='styleToken'};"></p>
+    <section class="teaser" data-sly-use.teaser="com.example.TeaserComponent">
+        <div onclick="${teaser.clickHandler @ context='scriptToken'}" style="color: ${teaser.color @ context='styleToken'};">
+            ${teaser.htmlContent @ context='html'}
+        </div>
+        <a href="${teaser.moreJsLink @ context='attribute'}">${teaser.moreText}</a>
+    </section>
     ```
-    
-    You can find a list of all available display contexts in the <a href="https://github.com/Adobe-Marketing-Cloud/sightly-spec/blob/master/SPECIFICATION.md#121-display-context" target="_blank">Sightly specification</a>.
 
   - [3.3](#3.3) <a name='3.3'></a> **Don't write unecessary expressions.**
   
