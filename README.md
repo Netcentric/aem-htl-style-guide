@@ -31,23 +31,32 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
 
   - [1.2](#1.2) <a name='1.2'></a> **Avoid inline JavaScript or CSS.**
   
-  Sightly is an HTML domain-specific template language and therefore makes little sense to be used to generate inline JavaScript or CSS. Within those contexts, only expressions can be used but the context always has to be specified explicitly, and block statements are impossible to use as HTML elements have no meaning there. Therefore, the Use-API should be used instead to construct the JSON data, which can then easily be passed to the client by writing that JSON into a data attribute.
+  In order to encourage keeping a clean separation of concerns, Sightly has by design some limitations for inline JavaScript or CSS:
+  * Because Sightly doesn't parse JavaScript or CSS, and therefore cannot automatically define the corresponding escaping, all expressions written there must provide an explicit `context` option.
+  * Because the HTML grammar ignores elements located inside a `<script>` or `<style>` elements, no block statement can be used within them.
   
+  Therefore JavaScript and CSS code should be placed instead into corresponding `.js` and `.css` files. Data attributes are the easiest way to communicate values to JavaScript, and class names are the best way to trigger specific styles.
+
     ```html
     <!--/* Bad */-->
-    <section id="top-teaser" data-sly-use.teaser="com.example.TeaserComponent">
-        <h2>${teaser.title}</h2>
-        <script>
-            var topTeaserConfig = {
-                skin: "${teaser.skin @ context='scriptString'}",
-                animationSpeed: ${teaser.animationSpeed @ context='number'}
-            }
+    <section class="teaser" data-sly-use.teaser="com.example.TeaserComponent">
+         <h2 class="teaser__title">${teaser.title}</h2>
+         <script>
+             var teaserConfig = {
+                 skin: "${teaser.skin @ context='scriptString'}",
+                 animationSpeed: ${teaser.animationSpeed @ context='number'}
+             };
         </script>
+        <style>
+            .teaser__title {
+                font-size: ${teaser.titleFontSize @ context='styleToken'}
+            }
+        </style>
     </section>
- 
+    
     <!--/* Good */-->
-    <section id="top-teaser" data-sly-use.teaser="com.example.TeaserComponent">
-        <h2 data-teaser-config="${teaser.jsonConfig}">${teaser.title}</h2>
+    <section class="teaser" data-sly-use.teaser="com.example.TeaserComponent" data-teaser-config="${teaser.jsonConfig}">
+        <h2 class="teaser__title teaser__title--font-${teaser.titleFontClass}">${teaser.title}</h2>
     </section>
     ```
 
