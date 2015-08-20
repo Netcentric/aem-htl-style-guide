@@ -29,6 +29,35 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     <link rel="stylesheet" type="text/css" href="styles.css"/>
     ```
 
+  - [1.2](#1.2) <a name='1.2'></a> **Avoid inline JavaScript or CSS.**
+  
+  In order to encourage keeping a clean separation of concerns, Sightly has by design some limitations for inline JavaScript or CSS. First, because Sightly doesn't parse JavaScript or CSS, and therefore cannot automatically define the corresponding escaping, all expressions written there must provide an explicit `context` option. Then, because the HTML grammar ignores elements located inside a `<script>` or `<style>` elements, no block statement can be used within them.
+  
+  Therefore JavaScript and CSS code should instead be placed into corresponding `.js` and `.css` files. Data attributes are the easiest way to communicate values to JavaScript, and class names are the best way to trigger specific styles.
+
+    ```html
+    <!--/* Bad */-->
+    <section class="teaser" data-sly-use.teaser="com.example.TeaserComponent">
+         <h2 class="teaser__title">${teaser.title}</h2>
+         <script>
+             var teaserConfig = {
+                 skin: "${teaser.skin @ context='scriptString'}",
+                 animationSpeed: ${teaser.animationSpeed @ context='number'}
+             };
+        </script>
+        <style>
+            .teaser__title {
+                font-size: ${teaser.titleFontSize @ context='styleToken'}
+            }
+        </style>
+    </section>
+    
+    <!--/* Good */-->
+    <section class="teaser" data-sly-use.teaser="com.example.TeaserComponent" data-teaser-config="${teaser.jsonConfig}">
+        <h2 class="teaser__title teaser__title--font-${teaser.titleFontClass}">${teaser.title}</h2>
+    </section>
+    ```
+
 **[⬆ back to top](#table-of-contents)**
 
 <a name='comments'></a>
@@ -73,6 +102,22 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     
     You can find a list of all available display contexts in the <a href="https://github.com/Adobe-Marketing-Cloud/sightly-spec/blob/master/SPECIFICATION.md#121-display-context" target="_blank">Sightly specification</a>.
 
+  - [3.3](#3.3) <a name='3.3'></a> **Don't write unecessary expressions.**
+  
+  It might sound obvious, but an expression with just a string inside equals just that string.
+
+    ```html
+    <!--/* Bad */-->
+    <sly data-sly-use.clientlib="${'/libs/granite/sightly/templates/clientlib.html'}">
+        ...
+    </sly>
+ 
+    <!--/* Good */-->
+    <sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html">
+        ...
+    </sly>
+    ```
+  
 **[⬆ back to top](#table-of-contents)**
 
 <a name='block-statements'></a>
