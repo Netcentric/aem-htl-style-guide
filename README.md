@@ -94,15 +94,15 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
 
   From the following list of contexts, always choose the one closest to the top that fits your needs:  
   `number`: For whole numbers (in HTML, JS or CSS)  
-  `uri`: For links and paths (in HTML, JS or CSS, used by default in `src` and `href` attributes)  
-  `elementName`: For HTML element names (used by default by `data-sly-element`)  
-  `attributeName`: For HTML attribute names (used by default with `data-sly-attribute`)  
+  `uri`: For links and paths (in HTML, JS or CSS, applied by default for `src` and `href` attributes)  
+  `elementName`: For HTML element names (applied by default by `data-sly-element`)  
+  `attributeName`: For HTML attribute names (applied by default by `data-sly-attribute` for attribute names)  
   `styleToken`: For JavaScript identifiers and keywords  
   `scriptToken`: For CSS identifiers and keywords  
   `scriptString`: For text within JavaScript strings  
   `styleString`: For text within CSS strings  
-  `attribute`: For HTML attribute values (used by default in attribute values)  
-  `text`: For HTML text content (used by default for any content)  
+  `attribute`: For HTML attribute values (applied by default for attribute values)  
+  `text`: For HTML text content (applied by default for any content)  
   `html`: For HTML markup (it filters out all elements and attributes that could be dangerous)  
   `unsafe`: Unescaped and unfiltered direct output  
 
