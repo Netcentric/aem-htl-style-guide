@@ -109,18 +109,18 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     ```html
     <!--/* Bad */-->
     <section class="teaser" data-sly-use.teaser="com.example.TeaserComponent">
-        <div onclick="${teaser.clickHandler @ context='unsafe'}" style="color: ${teaser.color @ context='unsafe'};">
+        <h4 onclick="${teaser.clickHandler @ context='unsafe'}">${teaser.title}</h4>
+        <div style="color: ${teaser.color @ context='unsafe'};">
             ${teaser.htmlContent @ context='unsafe'}
         </div>
-        <a href="${teaser.moreJsLink @ context='unsafe'}">${teaser.moreText}</a>
     </section>
  
     <!--/* Good */-->
     <section class="teaser" data-sly-use.teaser="com.example.TeaserComponent">
-        <div onclick="${teaser.clickHandler @ context='scriptToken'}" style="color: ${teaser.color @ context='styleToken'};">
+        <h4 onclick="${teaser.clickHandler @ context='scriptToken'}">${teaser.title}</h4>
+        <div style="color: ${teaser.color @ context='styleToken'};">
             ${teaser.htmlContent @ context='html'}
         </div>
-        <a href="${teaser.moreJsLink @ context='attribute'}">${teaser.moreText}</a>
     </section>
     ```
 
