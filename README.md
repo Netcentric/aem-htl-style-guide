@@ -183,30 +183,24 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     <sly data-sly-include="content.html" data-sly-unwrap/>
     ```
     
-  - [4.2](#4.2) <a name='4.2'></a> **Always wrap component markup inside a data-sly-use statement.**
+  - [4.2](#4.2) <a name='4.2'></a> **Always place data-sly-use only in your root element.**
     
-    The inner Sightly logic will only be executed if the Java or JavaScript logic works without errors.
-
-    ```html
-    <!--/* Bad */-->
-    <sly data-sly-use.teaser="com.example.TeaserComponent"/>
-     
-    <section class="teaser">
-        <h2>${teaser.title}</h2>
-        <p>${teaser.text}</a>
-    </section>
+    Since data-sly-use identifiers are always global (http://docs.adobe.com/docs/en/aem/6-0/develop/sightly/use-api-in-java.html#Local%20identifier), these attributes should only be placed in the root element. That way one can easily see name clashes and also it prevents initializing the same object twice.
     
+     ```html
     <!--/* Bad */-->
-    <section class="teaser">
-        <h2 data-sly-use.teaser="com.example.TeaserComponent">${teaser.title}</h2>
-        <p>${teaser.text}</a>
-    </section>
+    <div>
+    	<div>
+    		<p data-sly-use.teaser-model="com.example.Teaser">...<p>
+        <div>
+    </div>
      
     <!--/* Good */-->
-    <section class="teaser" data-sly-use.teaser="com.example.TeaserComponent">
-        <h2>${teaser.title}</h2>
-        <p>${teaser.text}</a>
-    </section>
+    <div data-sly-use.teaser-model="com.example.Teaser">
+        <div>
+        	<p>...</p>
+       </div>
+    </div>
     ```
     
   - [4.3](#4.3) <a name='4.3'></a> **Use meaningful identifier names.**
@@ -227,7 +221,8 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     
   - [4.4](#4.4) <a name='4.4'></a> **Use camelcase for identifier names.**
   
-    Using camelCase will help to increase the readability of your identifiers.
+    Using camelCase will help to increase the readability of your identifiers. Notice though that
+    Sightly will internally only use (and log) lowercase identifiers. Also dashes are not allowed for identifiers.
 
     ```html
     <!--/* Bad */-->
