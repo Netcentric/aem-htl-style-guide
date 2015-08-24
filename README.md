@@ -310,7 +310,7 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     <p class="event__year">${event.year}</p>
     ```
     
-  - [4.9](#4.9) <a name='4.9'></a> **Always defined your templates in a seperate file.**
+  - [4.10](#4.10) <a name='4.10'></a> **Always defined your templates in a seperate file.**
   
     It's cleaner to create seperate files for your template markup, so your Sightly scripts will not get cluttered. 
 
