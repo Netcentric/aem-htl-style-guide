@@ -294,7 +294,7 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     </section>
     ```
     
-  - [4.9](#4.10) <a name='4.10'></a> **Try to avoid the element, attribute and text block statements.**
+  - [4.9](#4.9) <a name='4.9'></a> **Try to avoid the element, attribute and text block statements.**
   
     It's a lot cleaner and explicit writing your Sightly scripts without these block statements.
 
