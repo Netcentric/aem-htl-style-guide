@@ -183,24 +183,20 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     <sly data-sly-include="content.html" data-sly-unwrap/>
     ```
     
-  - [4.2](#4.2) <a name='4.2'></a> **Always place data-sly-use only in your root element.**
+  - [4.2](#4.2) <a name='4.2'></a> **Try to place use data-sly-use statements only on root elements.**
     
     Since data-sly-use identifiers are always global (http://docs.adobe.com/docs/en/aem/6-0/develop/sightly/use-api-in-java.html#Local%20identifier), these attributes should only be placed in the root element. That way one can easily see name clashes and also it prevents initializing the same object twice.
     
      ```html
     <!--/* Bad */-->
-    <div>
-    	<div>
-    		<p data-sly-use.teaser-model="com.example.Teaser">...<p>
-        <div>
-    </div>
+    <section class="teaser">
+        <h3 data-sly-use.teaser="com.example.TeaserComponent">${teaser.title}</h3>
+    </section>
      
     <!--/* Good */-->
-    <div data-sly-use.teaser-model="com.example.Teaser">
-        <div>
-        	<p>...</p>
-       </div>
-    </div>
+    <section class="teaser" data-sly-use.teaser="com.example.TeaserComponent">
+        <h3>${teaser.title}</h3>
+    </section>
     ```
     
   - [4.3](#4.3) <a name='4.3'></a> **Use meaningful identifier names.**
