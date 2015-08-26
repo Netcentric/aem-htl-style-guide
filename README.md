@@ -310,6 +310,33 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     <p class="event__year">${event.year}</p>
     ```
     
+  - [4.10](#4.10) <a name='4.10'></a> **Always define your templates in a separate file.**
+  
+    It's cleaner to create separate files for your template markup, so your Sightly scripts will not get cluttered. 
+
+    ```html
+    <!--/* Bad */-->
+    <sly data-sly-use.teaser="com.example.TeaserComponent">
+      <sly data-sly-template.teaserSmall="${@ title, text}">
+        <h2>${title}</h2>
+        <p>${text}</p>
+      </sly>
+      
+      <sly data-sly-call="${teaserSmall @ title=teaser.title, text=teaser.text}"/>
+    </sly>
+    
+    <!--/* Good - Seperate template file: "teaser-templates.html" */-->
+    <sly data-sly-template.teaserSmall="${@ teaserModal}">
+      <h2>${teaserModal.title}</h2>
+      <p>${teaserModal.text}</p>
+    </sly>
+    
+    <!--/* Good - Sightly script */-->
+    <sly data-sly-use.teaser="com.example.TeaserComponent" data-sly-use.teaserTemplates="teaser-templates.html">
+      <sly data-sly-call="${teaserTemplates.teaserSmall @ teaserModel=teaser}"/>
+    </sly>
+    ```
+    
 **[⬆ back to top](#table-of-contents)**
 
 
