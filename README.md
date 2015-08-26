@@ -325,7 +325,7 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
       <sly data-sly-call="${teaserSmall @ title=teaser.title, text=teaser.text}"/>
     </sly>
     
-    <!--/* Good - Seperate template file: "teaser-templates.html" */-->
+    <!--/* Good - Separate template file: "teaser-templates.html" */-->
     <sly data-sly-template.teaserSmall="${@ teaserModal}">
       <h2>${teaserModal.title}</h2>
       <p>${teaserModal.text}</p>
