@@ -326,9 +326,9 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     </sly>
     
     <!--/* Good - Separate template file: "teaser-templates.html" */-->
-    <sly data-sly-template.teaserSmall="${@ teaserModal}">
-      <h2>${teaserModal.title}</h2>
-      <p>${teaserModal.text}</p>
+    <sly data-sly-template.teaserSmall="${@ teaserModel}">
+      <h2>${teaserModel.title}</h2>
+      <p>${teaserModel.text}</p>
     </sly>
     
     <!--/* Good - Sightly script */-->
