@@ -97,8 +97,8 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
   `uri`: For links and paths (in HTML, JS or CSS, applied by default for `src` and `href` attributes)  
   `elementName`: For HTML element names (applied by default by `data-sly-element`)  
   `attributeName`: For HTML attribute names (applied by default by `data-sly-attribute` for attribute names)  
-  `scriptToken`: For CSS identifiers and keywords  
-  `styleToken`: For JavaScript identifiers and keywords  
+  `scriptToken`: For JavaScript identifiers and keywords  
+  `styleToken`: For CSS identifiers and keywords  
   `scriptString`: For text within JavaScript strings  
   `styleString`: For text within CSS strings  
   `attribute`: For HTML attribute values (applied by default for attribute values)  
