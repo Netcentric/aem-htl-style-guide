@@ -147,7 +147,7 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
 
   - [4.1](#4.1) <a name='4.1'></a> **Use the SLY tag name for all elements that are not part of the markup.**
   
-    HTML elements with the tag name SLY are automatically getting unwrapped and will not be part of the final markup. For empty SLY elements, use the self-closing "/" form.
+    HTML elements with the tag name SLY are automatically getting unwrapped and will not be part of the final markup.
 
     ```html
     <!--/* Bad */-->
@@ -162,10 +162,10 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     </div>
      
     <!--/* Good */-->
-    <sly data-sly-include="content.html"/>
+    <sly data-sly-include="content.html"></sly>
      
     <!--/* Good */-->
-    <sly data-sly-resource="${item @ selectors = 'event'}"/>
+    <sly data-sly-resource="${item @ selectors = 'event'}"></sly>
      
     <!--/* Good */-->
     <sly data-sly-test="${event.hasDate}">
@@ -177,10 +177,10 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     
     ```html
     <!--/* Bad - Sightly 1.0 */-->
-    <sly data-sly-include="content.html"/>
+    <sly data-sly-include="content.html"></sly>
      
     <!--/* Good - Sightly 1.0 */-->
-    <sly data-sly-include="content.html" data-sly-unwrap/>
+    <sly data-sly-include="content.html" data-sly-unwrap></sly>
     ```
     
   - [4.2](#4.2) <a name='4.2'></a> **Try to place use data-sly-use statements only on root elements.**
@@ -322,7 +322,7 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
         <p>${text}</p>
       </sly>
       
-      <sly data-sly-call="${teaserSmall @ title=teaser.title, text=teaser.text}"/>
+      <sly data-sly-call="${teaserSmall @ title=teaser.title, text=teaser.text}"></sly>
     </sly>
     
     <!--/* Good - Separate template file: "teaser-templates.html" */-->
@@ -333,7 +333,7 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     
     <!--/* Good - Sightly script */-->
     <sly data-sly-use.teaser="com.example.TeaserComponent" data-sly-use.teaserTemplates="teaser-templates.html">
-      <sly data-sly-call="${teaserTemplates.teaserSmall @ teaserModel=teaser}"/>
+      <sly data-sly-call="${teaserTemplates.teaserSmall @ teaserModel=teaser}"></sly>
     </sly>
     ```
     
