@@ -1,5 +1,5 @@
-# AEM Sightly Style Guide
-A style guide for Sightly, the HTML templating system from Adobe Experience Manager (AEM).
+# AEM HTL Style Guide
+A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/htl.html) (HTL), formerly known as Sightly, the HTML templating system from Adobe Experience Manager (AEM).
 
 ## Table of Contents
 
@@ -13,7 +13,7 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
 
   - [1.1](#1.1) <a name='1.1'></a> **Always self close HTML void elements.**
   
-  Although the self-closing "/" is optional in HTML5, not adding them in your Sightly script could result in errors.
+  Although the self-closing "/" is optional in HTML5, not adding them in your HTL script could result in errors.
   
     ```html
     <!--/* Bad */-->
@@ -31,7 +31,7 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
 
   - [1.2](#1.2) <a name='1.2'></a> **Avoid inline JavaScript or CSS.**
   
-  In order to encourage keeping a clean separation of concerns, Sightly has by design some limitations for inline JavaScript or CSS. First, because Sightly doesn't parse JavaScript or CSS, and therefore cannot automatically define the corresponding escaping, all expressions written there must provide an explicit `context` option. Then, because the HTML grammar ignores elements located inside a `<script>` or `<style>` elements, no block statement can be used within them.
+  In order to encourage keeping a clean separation of concerns, HTL has by design some limitations for inline JavaScript or CSS. First, because HTL doesn't parse JavaScript or CSS, and therefore cannot automatically define the corresponding escaping, all expressions written there must provide an explicit `context` option. Then, because the HTML grammar ignores elements located inside a `<script>` or `<style>` elements, no block statement can be used within them.
   
   Therefore JavaScript and CSS code should instead be placed into corresponding `.js` and `.css` files. Data attributes are the easiest way to communicate values to JavaScript, and class names are the best way to trigger specific styles.
 
@@ -63,14 +63,14 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
 <a name='comments'></a>
 ## 2. Comments
 
-  - [2.1](#2.1) <a name='2.1'></a> **Always use Sightly comments.**
+  - [2.1](#2.1) <a name='2.1'></a> **Always use HTL comments.**
   
-    Normal HTML comments get rendered to the final markup. To keep the DOM clean, always use Sightly comments over normal HTML comments.
+    Normal HTML comments get rendered to the final markup. To keep the DOM clean, always use HTL comments over normal HTML comments.
 
     ```html
     <!-- Never use HTML comments -->
  
-    <!--/* Always use Sightly comments */-->
+    <!--/* Always use HTL comments */-->
     ```
 
 **[⬆ back to top](#table-of-contents)**
@@ -130,12 +130,12 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
 
     ```html
     <!--/* Bad */-->
-    <sly data-sly-use.clientlib="${'/libs/granite/sightly/templates/clientlib.html'}">
+    <sly data-sly-use.clientlib="${'/libs/granite/htl/templates/clientlib.html'}">
         ...
     </sly>
  
     <!--/* Good */-->
-    <sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html">
+    <sly data-sly-use.clientlib="/libs/granite/htl/templates/clientlib.html">
         ...
     </sly>
     ```
@@ -173,19 +173,19 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     </sly>
     ```
     
-    **IMPORTANT** - The SLY element will not automatically unwrap itself if you use Sightly 1.0 (AEM 6.0). In that case, you still have to add the "data-sly-unwrap" attribute.
+    **IMPORTANT** - The SLY element will not automatically unwrap itself if you use HTL 1.0 (AEM 6.0). In that case, you still have to add the "data-sly-unwrap" attribute.
     
     ```html
-    <!--/* Bad - Sightly 1.0 */-->
+    <!--/* Bad - HTL 1.0 */-->
     <sly data-sly-include="content.html"></sly>
      
-    <!--/* Good - Sightly 1.0 */-->
+    <!--/* Good - HTL 1.0 */-->
     <sly data-sly-include="content.html" data-sly-unwrap></sly>
     ```
     
   - [4.2](#4.2) <a name='4.2'></a> **Try to place use data-sly-use statements only on root elements.**
     
-    Since data-sly-use identifiers are always global (http://docs.adobe.com/docs/en/aem/6-0/develop/sightly/use-api-in-java.html#Local%20identifier), these attributes should only be placed in the root element. That way one can easily see name clashes and also it prevents initializing the same object twice.
+    Since data-sly-use identifiers are always global (http://docs.adobe.com/docs/en/aem/6-0/develop/htl/use-api-in-java.html#Local%20identifier), these attributes should only be placed in the root element. That way one can easily see name clashes and also it prevents initializing the same object twice.
     
      ```html
     <!--/* Bad */-->
@@ -201,7 +201,7 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     
   - [4.3](#4.3) <a name='4.3'></a> **Use meaningful identifier names.**
   
-    This will enhance the readability of your Sightly scripts and and makes it easier for others to understand.
+    This will enhance the readability of your HTL scripts and and makes it easier for others to understand.
 
     ```html
     <!--/* Bad */-->
@@ -218,7 +218,7 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
   - [4.4](#4.4) <a name='4.4'></a> **Use camelcase for identifier names.**
   
     Using camelCase will help to increase the readability of your identifiers. Notice though that
-    Sightly will internally only use (and log) lowercase identifiers. Also dashes are not allowed for identifiers.
+    HTL will internally only use (and log) lowercase identifiers. Also dashes are not allowed for identifiers.
 
     ```html
     <!--/* Bad */-->
@@ -296,7 +296,7 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     
   - [4.9](#4.9) <a name='4.9'></a> **Try to avoid the element, attribute and text block statements.**
   
-    It's a lot cleaner and explicit writing your Sightly scripts without these block statements.
+    It's a lot cleaner and explicit writing your HTL scripts without these block statements.
 
     ```html
     <!--/* Bad */-->
@@ -312,7 +312,7 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
     
   - [4.10](#4.10) <a name='4.10'></a> **Always define your templates in a separate file.**
   
-    It's cleaner to create separate files for your template markup, so your Sightly scripts will not get cluttered. 
+    It's cleaner to create separate files for your template markup, so your HTL scripts will not get cluttered. 
 
     ```html
     <!--/* Bad */-->
@@ -331,7 +331,7 @@ A style guide for Sightly, the HTML templating system from Adobe Experience Mana
       <p>${teaserModel.text}</p>
     </sly>
     
-    <!--/* Good - Sightly script */-->
+    <!--/* Good - HTL script */-->
     <sly data-sly-use.teaser="com.example.TeaserComponent" data-sly-use.teaserTemplates="teaser-templates.html">
       <sly data-sly-call="${teaserTemplates.teaserSmall @ teaserModel=teaser}"></sly>
     </sly>
