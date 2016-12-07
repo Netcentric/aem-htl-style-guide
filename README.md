@@ -130,12 +130,12 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
 
     ```html
     <!--/* Bad */-->
-    <sly data-sly-use.clientlib="${'/libs/granite/htl/templates/clientlib.html'}">
+    <sly data-sly-use.clientlib="${'/libs/granite/sightly/templates/clientlib.html'}">
         ...
     </sly>
  
     <!--/* Good */-->
-    <sly data-sly-use.clientlib="/libs/granite/htl/templates/clientlib.html">
+    <sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html">
         ...
     </sly>
     ```
@@ -185,7 +185,7 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     
   - [4.2](#4.2) <a name='4.2'></a> **Try to place use data-sly-use statements only on root elements.**
     
-    Since data-sly-use identifiers are always global (http://docs.adobe.com/docs/en/aem/6-0/develop/htl/use-api-in-java.html#Local%20identifier), these attributes should only be placed in the root element. That way one can easily see name clashes and also it prevents initializing the same object twice.
+    Since data-sly-use identifiers are always global (https://docs.adobe.com/docs/en/htl/docs/use-api/java.html#Local%20identifier), these attributes should only be placed in the root element. That way one can easily see name clashes and also it prevents initializing the same object twice.
     
      ```html
     <!--/* Bad */-->
