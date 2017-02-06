@@ -124,9 +124,9 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     </section>
     ```
 
-  - [3.3](#3.3) <a name='3.3'></a> **Don't write unecessary expressions.**
+  - [3.3](#3.3) <a name='3.3'></a> **Don't write unnecessary expressions for literals.**
   
-  It might sound obvious, but an expression with just a string inside equals just that string.
+  It might sound obvious, but an expression with just a string literal inside equals just that string literal.
 
     ```html
     <!--/* Bad */-->
