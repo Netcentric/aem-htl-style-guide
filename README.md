@@ -11,25 +11,7 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
 <a name='html'></a>
 ## 1. HTML
 
-  - [1.1](#1.1) <a name='1.1'></a> **Always self close HTML void elements.**
-  
-  Although the self-closing "/" is optional in HTML5, not adding them in your HTL script could result in errors.
-  
-    ```html
-    <!--/* Bad */-->
-    <input type="text" name="name">
-    <img src="smiley.gif" alt="Smiley face" height="42" width="42">
-    <meta name="author" content="Erik Grijzen">
-    <link rel="stylesheet" type="text/css" href="styles.css">
-     
-    <!--/* Good */-->
-    <input type="text" name="name"/>
-    <img src="smiley.gif" alt="Smiley face" height="42" width="42"/>
-    <meta name="author" content="Erik Grijzen"/>
-    <link rel="stylesheet" type="text/css" href="styles.css"/>
-    ```
-
-  - [1.2](#1.2) <a name='1.2'></a> **Avoid inline JavaScript or CSS.**
+  - [1.1](#1.1) <a name='1.1'></a> **Avoid inline JavaScript or CSS.**
   
   In order to encourage keeping a clean separation of concerns, HTL has by design some limitations for inline JavaScript or CSS. First, because HTL doesn't parse JavaScript or CSS, and therefore cannot automatically define the corresponding escaping, all expressions written there must provide an explicit `context` option. Then, because the HTML grammar ignores elements located inside a `<script>` or `<style>` elements, no block statement can be used within them.
   
