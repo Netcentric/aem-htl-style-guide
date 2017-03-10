@@ -121,6 +121,18 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
         ...
     </sly>
     ```
+    
+  - [3.4](#3.4) <a name='3.4'></a> **Always provide i18n translation hints.**
+  
+  The more context the translators have about a specific text, the better they can do their work.
+
+    ```html
+    <!--/* Bad */-->
+    <input type="text" name="search" placeholder="${'Your topic' @ i18n}" />
+ 
+    <!--/* Good */-->
+    <input type="text" name="search" placeholder="${'Your topic' @ i18n, hint='Search placeholder text.'}" />
+    ```
   
 **[⬆ back to top](#table-of-contents)**
 
