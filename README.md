@@ -165,9 +165,9 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     <sly data-sly-include="content.html" data-sly-unwrap></sly>
     ```
     
-  - [4.2](#4.2) <a name='4.2'></a> **Try to place use data-sly-use statements only on root elements.**
+  - [4.2](#4.2) <a name='4.2'></a> **Try to place use data-sly-use statements only on top-level elements.**
     
-    Since data-sly-use identifiers are always global (https://docs.adobe.com/docs/en/htl/docs/use-api/java.html#Local%20identifier), these attributes should only be placed in the root element. That way one can easily see name clashes and also it prevents initializing the same object twice.
+    Since data-sly-use identifiers are always global (https://docs.adobe.com/docs/en/htl/docs/use-api/java.html#Local%20identifier), these attributes should only be placed in the top-level element. That way one can easily see name clashes and also it prevents initializing the same object twice.
     
      ```html
     <!--/* Bad */-->
