@@ -14,6 +14,8 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
   - [1.1](#1.1) <a name='1.1'></a> **Avoid inline JavaScript or CSS.**
   
   In order to encourage keeping a clean separation of concerns, HTL has by design some limitations for inline JavaScript or CSS. First, because HTL doesn't parse JavaScript or CSS, and therefore cannot automatically define the corresponding escaping, all expressions written there must provide an explicit `context` option. Then, because the HTML grammar ignores elements located inside a `<script>` or `<style>` elements, no block statement can be used within them.
+ 
+Unless you are using HTML mail for campaign, in which case, inline styles can be set by SASS compilers.
   
   Therefore JavaScript and CSS code should instead be placed into corresponding `.js` and `.css` files. Data attributes are the easiest way to communicate values to JavaScript, and class names are the best way to trigger specific styles.
 
