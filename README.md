@@ -13,19 +13,19 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
 
   - [1.1](#1.1) <a name='1.1'></a> **Avoid inline JavaScript or CSS.**
   
-  In order to encourage keeping a clean separation of concerns, HTL has by design some limitations for inline JavaScript or CSS. First, because HTL doesn't parse JavaScript or CSS, and therefore cannot automatically define the corresponding escaping, all expressions written there must provide an explicit `context` option. Then, because the HTML grammar ignores elements located inside a `<script>` or `<style>` elements, no block statement can be used within them.
+    In order to encourage keeping a clean separation of concerns, HTL has by design some limitations for inline JavaScript or CSS. First, because HTL doesn't parse JavaScript or CSS, and therefore cannot automatically define the corresponding escaping, all expressions written there must provide an explicit `context` option. Then, because the HTML grammar ignores elements located inside a `<script>` or `<style>` elements, no block statement can be used within them.
   
-  Therefore JavaScript and CSS code should instead be placed into corresponding `.js` and `.css` files. Data attributes are the easiest way to communicate values to JavaScript, and class names are the best way to trigger specific styles.
+    Therefore JavaScript and CSS code should instead be placed into corresponding `.js` and `.css` files. Data attributes are the easiest way to communicate values to JavaScript, and class names are the best way to trigger specific styles.
 
     ```html
     <!--/* Bad */-->
     <section class="teaser" data-sly-use.teaser="com.example.TeaserComponent">
-         <h2 class="teaser__title">${teaser.title}</h2>
-         <script>
-             var teaserConfig = {
-                 skin: "${teaser.skin @ context='scriptString'}",
-                 animationSpeed: ${teaser.animationSpeed @ context='number'}
-             };
+        <h2 class="teaser__title">${teaser.title}</h2>
+        <script>
+            var teaserConfig = {
+                skin: "${teaser.skin @ context='scriptString'}",
+                animationSpeed: ${teaser.animationSpeed @ context='number'}
+            };
         </script>
         <style>
             .teaser__title {
@@ -62,7 +62,7 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
 
   - [3.1](#3.1) <a name='3.1'></a> **Only set a display context if necessary**
   
-  In most cases you can leave out the display context, because it is determined automatically.
+    In most cases you can leave out the display context, because it is determined automatically.
 
     ```html
     <!--/* Bad */-->
@@ -74,19 +74,19 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
 
   - [3.2](#3.2) <a name='3.2'></a> **Always use the safest possible display context.**
 
-  From the following list of contexts, always choose the one closest to the top that fits your needs:  
-  `number`: For whole numbers (in HTML, JS or CSS)  
-  `uri`: For links and paths (in HTML, JS or CSS, applied by default for `src` and `href` attributes)  
-  `elementName`: For HTML element names (applied by default by `data-sly-element`)  
-  `attributeName`: For HTML attribute names (applied by default by `data-sly-attribute` for attribute names)  
-  `scriptToken`: For JavaScript identifiers and keywords  
-  `styleToken`: For CSS identifiers and keywords  
-  `scriptString`: For text within JavaScript strings  
-  `styleString`: For text within CSS strings  
-  `attribute`: For HTML attribute values (applied by default for attribute values)  
-  `text`: For HTML text content (applied by default for any content)  
-  `html`: For HTML markup (it filters out all elements and attributes that could be dangerous)  
-  `unsafe`: Unescaped and unfiltered direct output  
+    From the following list of contexts, always choose the one closest to the top that fits your needs:  
+    `number`: For whole numbers (in HTML, JS or CSS)  
+    `uri`: For links and paths (in HTML, JS or CSS, applied by default for `src` and `href` attributes)  
+    `elementName`: For HTML element names (applied by default by `data-sly-element`)  
+    `attributeName`: For HTML attribute names (applied by default by `data-sly-attribute` for attribute names)  
+    `scriptToken`: For JavaScript identifiers and keywords  
+    `styleToken`: For CSS identifiers and keywords  
+    `scriptString`: For text within JavaScript strings  
+    `styleString`: For text within CSS strings  
+    `attribute`: For HTML attribute values (applied by default for attribute values)  
+    `text`: For HTML text content (applied by default for any content)  
+    `html`: For HTML markup (it filters out all elements and attributes that could be dangerous)  
+    `unsafe`: Unescaped and unfiltered direct output  
 
     ```html
     <!--/* Bad */-->
@@ -108,7 +108,7 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
 
   - [3.3](#3.3) <a name='3.3'></a> **Don't write unnecessary expressions for literals.**
   
-  It might sound obvious, but an expression with just a string literal inside equals just that string literal.
+    It might sound obvious, but an expression with just a string literal inside equals just that string literal.
 
     ```html
     <!--/* Bad */-->
