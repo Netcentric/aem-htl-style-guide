@@ -250,15 +250,19 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     </ul>
     ```
     
-  - [4.7](#4.7) <a name='4.7'></a> **Always place block statements after the normal HTML attributes.**
+  - [4.7](#4.7) <a name='4.7'></a> **Always place block statements before the regular HTML attributes.**
 
+   
+    The reason for that is that regular HTML attributes might use HTL variables which have been declared in the same element via `data-sly-use`. One should always declare things before using them. Also HTL block elements might influence if the element appears at all (via `data-sly-test`) or multiple times (via `data-sly-repeat`) and therefore are just too important to put them at the end of the attribute list. Further details in [issue 25](https://github.com/Netcentric/aem-htl-style-guide/issues/25).
+    
     ```html
     <!--/* Bad */-->
-    <p data-sly-test="${teaser.text}" class="teaser__text"></p>
-     
-    <!--/* Good */-->
     <p class="teaser__text" data-sly-test="${teaser.text}"></p>
+         
+    <!--/* Good */-->
+    <p data-sly-test="${teaser.text}" class="teaser__text"></p>
     ```
+ 
     
   - [4.8](#4.8) <a name='4.8'></a> **Always use existing HTML elements for your block statements if possible.**
 
