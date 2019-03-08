@@ -19,7 +19,7 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
 
     ```html
     <!--/* Bad */-->
-    <section class="teaser" data-sly-use.teaser="com.example.TeaserComponent">
+    <section data-sly-use.teaser="com.example.TeaserComponent" class="teaser">
         <h2 class="teaser__title">${teaser.title}</h2>
         <script>
             var teaserConfig = {
@@ -35,7 +35,7 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     </section>
     
     <!--/* Good */-->
-    <section class="teaser" data-sly-use.teaser="com.example.TeaserComponent" data-teaser-config="${teaser.jsonConfig}">
+    <section data-sly-use.teaser="com.example.TeaserComponent" data-teaser-config="${teaser.jsonConfig}" class="teaser">
         <h2 class="teaser__title teaser__title--font-${teaser.titleFontClass}">${teaser.title}</h2>
     </section>
     ```
@@ -90,7 +90,7 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
 
     ```html
     <!--/* Bad */-->
-    <section class="teaser" data-sly-use.teaser="com.example.TeaserComponent">
+    <section data-sly-use.teaser="com.example.TeaserComponent" class="teaser">
         <h4 onclick="${teaser.clickHandler @ context='unsafe'}">${teaser.title}</h4>
         <div style="color: ${teaser.color @ context='unsafe'};">
             ${teaser.htmlContent @ context='unsafe'}
@@ -98,7 +98,7 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     </section>
  
     <!--/* Good */-->
-    <section class="teaser" data-sly-use.teaser="com.example.TeaserComponent">
+    <section data-sly-use.teaser="com.example.TeaserComponent" class="teaser">
         <h4 onclick="${teaser.clickHandler @ context='scriptToken'}">${teaser.title}</h4>
         <div style="color: ${teaser.color @ context='styleToken'};">
             ${teaser.htmlContent @ context='html'}
@@ -176,7 +176,7 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     </section>
      
     <!--/* Good */-->
-    <section class="teaser" data-sly-use.teaser="com.example.TeaserComponent">
+    <section data-sly-use.teaser="com.example.TeaserComponent" class="teaser">
         <h3>${teaser.title}</h3>
     </section>
     ```
@@ -218,32 +218,32 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
 
     ```html
     <!--/* Bad */-->
-    <section class="teaser" data-sly-test="${!teaser.empty}">
+    <section data-sly-test="${!teaser.empty}" class="teaser">
         ...
     </section>
      
-    <div class="cq-placeholder" data-sly-test="${teaser.empty}"></div>
+    <div data-sly-test="${teaser.empty}" class="cq-placeholder"></div>
      
     <!--/* Good */-->
-    <section class="teaser" data-sly-test.hasContent="${!teaser.empty}">
+    <section data-sly-test.hasContent="${!teaser.empty}" class="teaser">
         ...
     </section>
      
-    <div class="cq-placeholder" data-sly-test="${!hasContent}"></div>
+    <div data-sly-test="${!hasContent}" class="cq-placeholder"></div>
     ```
     
   - [4.6](#4.6) <a name='4.6'></a> **Always use identifiers instead of the default “item” variable for list block statements.**
 
     ```html
     <!--/* Bad */-->
-    <ul class="tagList" data-sly-list="${tagList.tags}">
+    <ul data-sly-list="${tagList.tags}" class="tagList">
         <li class="tagList__tag">
             <a class="tagList__button" href="${item.url}">${item.title}</a>
         </li>
     </ul>
      
     <!--/* Good */-->
-    <ul class="tagList" data-sly-list.tag="${tagList.tags}">
+    <ul data-sly-list.tag="${tagList.tags}" class="tagList">
         <li class="tagList__tag">
             <a class="tagList__button" href="${tag.url}">${tag.title}</a>
         </li>
@@ -275,7 +275,7 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     </sly>
      
     <!--/* Good */-->
-    <section class="teaser" data-sly-test="${!teaser.active}">
+    <section data-sly-test="${!teaser.active}" class="teaser">
         …
     </section>
     ```
@@ -287,8 +287,8 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     ```html
     <!--/* Bad */-->
     <div data-sly-element="${headlineElement}">${event.year}</div>
-    <a href="#" data-sly-attribute.href="${event.link}"></a>
-    <p class="event__year" data-sly-text="${event.year}"></p>
+    <a data-sly-attribute.href="${event.link}" href="#"></a>
+    <p data-sly-text="${event.year}" class="event__year"></p>
      
     <!--/* Good */-->
     <h2>${event.year}</h2>
