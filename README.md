@@ -214,7 +214,9 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     </sly>
     ```
     
-  - [4.5](#4.5) <a name='4.5'></a> **Always cache test block statement results in an identifier if it repeats itself.**
+  - [4.5](#4.5) <a name='4.5'></a> **Re-use expressions with identifiers**
+
+    If a test block statement is used multiple times, define an identifer and re-use it, for performance reasons.
 
     ```html
     <!--/* Bad */-->
@@ -231,7 +233,25 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
      
     <div data-sly-test="${!hasContent}" class="cq-placeholder"></div>
     ```
-    
+
+    Similarly, if a generic expression is used multiple times, define an identifer with `data-sly-set` and re-use it, for performance reasons.
+
+    ```html
+    <!--/* Bad */-->
+    <section data-sly-test.full="${!teaser.empty}" class="teaser">
+        ...
+    </section>
+     
+    <div data-sly-test="${teaser.empty}" class="cq-placeholder"></div>
+     
+    <!--/* Good */-->
+    <section data-sly-test.hasContent="${!teaser.empty}" class="teaser">
+        ...
+    </section>
+     
+    <div data-sly-test="${!hasContent}" class="cq-placeholder"></div>
+    ```
+
   - [4.6](#4.6) <a name='4.6'></a> **Always use identifiers instead of the default “item” variable for list block statements.**
 
     ```html
@@ -322,6 +342,23 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
       <sly data-sly-call="${teaserTemplates.teaserSmall @ teaserModel=teaser}"></sly>
     </sly>
     ```
+
+- [4.11](#4.11) <a name='4.11'></a> **Avoid using data-sly-test to set arbitrary variable bindings**
+
+    Instead of setting a variable with `data-sly-test`, use the purposefully defined `data-sly-set`
+
+    ```html
+    <!--/* Instead of */-->
+    <sly data-sly-test="${person.firstName && person.lastName && person.image}" data-sly-test.fullName="${person.firstName} ${person.lastName}">
+    <h1>${fullName}</h1>
+    <img src=${person.image}" alt="${fullName}"/>
+     
+    <!--/* Use */-->
+    <sly data-sly-test="${person.firstName && person.lastName && person.image}" data-sly-set.fullName="${person.firstName} ${person.lastName}">
+    <h1>${fullName}</h1>
+    <img src=${person.image}" alt="${fullName}"/>
+    ```
+    
     
 **[⬆ back to top](#table-of-contents)**
 
