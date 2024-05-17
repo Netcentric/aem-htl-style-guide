@@ -18,7 +18,7 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     Therefore JavaScript and CSS code should instead be placed into corresponding `.js` and `.css` files. Data attributes are the easiest way to communicate values to JavaScript, and class names are the best way to trigger specific styles.
 
     ```html
-    <!--/* Bad */-->
+    <!--/* Instead of */-->
     <section data-sly-use.teaser="com.example.TeaserComponent" class="teaser">
         <h2 class="teaser__title">${teaser.title}</h2>
         <script>
@@ -34,7 +34,7 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
         </style>
     </section>
     
-    <!--/* Good */-->
+    <!--/* Use */-->
     <section data-sly-use.teaser="com.example.TeaserComponent" data-teaser-config="${teaser.jsonConfig}" class="teaser">
         <h2 class="teaser__title teaser__title--font-${teaser.titleFontClass}">${teaser.title}</h2>
     </section>
@@ -65,10 +65,10 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     In most cases you can leave out the display context, because it is determined automatically.
 
     ```html
-    <!--/* Bad */-->
+    <!--/* Instead of */-->
     <a href="${teaser.link @ context = 'uri'}"></a>
  
-    <!--/* Good */-->
+    <!--/* Use */-->
     <a href="${teaser.link}"></a>
     ```
 
@@ -89,7 +89,7 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     `unsafe`: Unescaped and unfiltered direct output  
 
     ```html
-    <!--/* Bad */-->
+    <!--/* Instead of */-->
     <section data-sly-use.teaser="com.example.TeaserComponent" class="teaser">
         <h4 onclick="${teaser.clickHandler @ context='unsafe'}">${teaser.title}</h4>
         <div style="color: ${teaser.color @ context='unsafe'};">
@@ -97,7 +97,7 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
         </div>
     </section>
  
-    <!--/* Good */-->
+    <!--/* Use */-->
     <section data-sly-use.teaser="com.example.TeaserComponent" class="teaser">
         <h4 onclick="${teaser.clickHandler @ context='scriptToken'}">${teaser.title}</h4>
         <div style="color: ${teaser.color @ context='styleToken'};">
@@ -111,12 +111,12 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     It might sound obvious, but an expression with just a string literal inside equals just that string literal.
 
     ```html
-    <!--/* Bad */-->
+    <!--/* Instead of */-->
     <sly data-sly-use.clientlib="${'/libs/granite/sightly/templates/clientlib.html'}">
         ...
     </sly>
  
-    <!--/* Good */-->
+    <!--/* Use */-->
     <sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html">
         ...
     </sly>
@@ -132,24 +132,28 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     HTML elements with the tag name SLY are automatically getting unwrapped and will not be part of the final markup.
 
     ```html
-    <!--/* Bad */-->
+    <!--/* Instead of */-->
     <div data-sly-include="content.html" data-sly-unwrap></div>
      
-    <!--/* Bad */-->
+    <!--/* Use */-->
+    <sly data-sly-include="content.html"></sly>
+    ```
+    
+    ```html
+    <!--/* Instead of */-->
     <div data-sly-resource="${item @ selectors='event'}" data-sly-unwrap></div>
      
-    <!--/* Bad */-->
+    <!--/* Use */-->
+    <sly data-sly-resource="${item @ selectors = 'event'}"></sly>
+    ```
+    
+    ```html
+    <!--/* Instead of */-->
     <div data-sly-test="${event.hasDate}" data-sly-unwrap>
         ...
     </div>
      
-    <!--/* Good */-->
-    <sly data-sly-include="content.html"></sly>
-     
-    <!--/* Good */-->
-    <sly data-sly-resource="${item @ selectors = 'event'}"></sly>
-     
-    <!--/* Good */-->
+    <!--/* Use */-->
     <sly data-sly-test="${event.hasDate}">
         ...
     </sly>
@@ -158,10 +162,10 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     **IMPORTANT** - The SLY element will not automatically unwrap itself if you use HTL 1.0 (AEM 6.0). In that case, you still have to add the "data-sly-unwrap" attribute.
     
     ```html
-    <!--/* Bad - HTL 1.0 */-->
+    <!--/* Instead of - HTL 1.0 */-->
     <sly data-sly-include="content.html"></sly>
      
-    <!--/* Good - HTL 1.0 */-->
+    <!--/* Use - HTL 1.0 */-->
     <sly data-sly-include="content.html" data-sly-unwrap></sly>
     ```
     
@@ -170,12 +174,12 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     Since data-sly-use identifiers are always global (https://docs.adobe.com/docs/en/htl/docs/use-api/java.html#Local%20identifier), these attributes should only be placed in the top-level element. That way one can easily see name clashes and also it prevents initializing the same object twice.
     
      ```html
-    <!--/* Bad */-->
+    <!--/* Instead of */-->
     <section class="teaser">
         <h3 data-sly-use.teaser="com.example.TeaserComponent">${teaser.title}</h3>
     </section>
      
-    <!--/* Good */-->
+    <!--/* Use */-->
     <section data-sly-use.teaser="com.example.TeaserComponent" class="teaser">
         <h3>${teaser.title}</h3>
     </section>
@@ -186,12 +190,12 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     This will enhance the readability of your HTL scripts and and makes it easier for others to understand.
 
     ```html
-    <!--/* Bad */-->
+    <!--/* Instead of */-->
     <sly data-sly-use.comp="com.example.TeaserComponent">
         ...
     </sly>
      
-    <!--/* Good */-->
+    <!--/* Use */-->
     <sly data-sly-use.teaser="com.example.TeaserComponent">
         ...
     </sly>
@@ -203,12 +207,12 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     HTL will internally only use (and log) lowercase identifiers. Also dashes are not allowed for identifiers.
 
     ```html
-    <!--/* Bad */-->
+    <!--/* Instead of */-->
     <sly data-sly-use.mediagallery="com.example.MediaGallery">
         ...
     </sly>
      
-    <!--/* Good */-->
+    <!--/* Use */-->
     <sly data-sly-use.mediaGallery="com.example.MediaGallery">
         ...
     </sly>
@@ -217,14 +221,14 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
   - [4.5](#4.5) <a name='4.5'></a> **Always cache test block statement results in an identifier if it repeats itself.**
 
     ```html
-    <!--/* Bad */-->
+    <!--/* Instead of */-->
     <section data-sly-test="${!teaser.empty}" class="teaser">
         ...
     </section>
      
     <div data-sly-test="${teaser.empty}" class="cq-placeholder"></div>
      
-    <!--/* Good */-->
+    <!--/* Use */-->
     <section data-sly-test.hasContent="${!teaser.empty}" class="teaser">
         ...
     </section>
@@ -235,14 +239,14 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
   - [4.6](#4.6) <a name='4.6'></a> **Always use identifiers instead of the default “item” variable for list block statements.**
 
     ```html
-    <!--/* Bad */-->
+    <!--/* Instead of */-->
     <ul data-sly-list="${tagList.tags}" class="tagList">
         <li class="tagList__tag">
             <a class="tagList__button" href="${item.url}">${item.title}</a>
         </li>
     </ul>
      
-    <!--/* Good */-->
+    <!--/* Use */-->
     <ul data-sly-list.tag="${tagList.tags}" class="tagList">
         <li class="tagList__tag">
             <a class="tagList__button" href="${tag.url}">${tag.title}</a>
@@ -256,10 +260,10 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     The reason for that is that regular HTML attributes might use HTL variables which have been declared in the same element via `data-sly-use`. One should always declare things before using them. Also HTL block elements might influence if the element appears at all (via `data-sly-test`) or multiple times (via `data-sly-repeat`) and therefore are just too important to put them at the end of the attribute list. Further details in [issue 25](https://github.com/Netcentric/aem-htl-style-guide/issues/25).
     
     ```html
-    <!--/* Bad */-->
+    <!--/* Instead of */-->
     <p class="teaser__text" data-sly-test="${teaser.text}"></p>
          
-    <!--/* Good */-->
+    <!--/* Use */-->
     <p data-sly-test="${teaser.text}" class="teaser__text"></p>
     ```
  
@@ -267,14 +271,14 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
   - [4.8](#4.8) <a name='4.8'></a> **Always use existing HTML elements for your block statements if possible.**
 
     ```html
-    <!--/* Bad */-->
+    <!--/* Instead of */-->
     <sly data-sly-test="${!teaser.active}">
         <section class="teaser">
             …
         </section>
     </sly>
      
-    <!--/* Good */-->
+    <!--/* Use */-->
     <section data-sly-test="${!teaser.active}" class="teaser">
         …
     </section>
@@ -285,12 +289,12 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     It's a lot cleaner and explicit writing your HTL scripts without these block statements.
 
     ```html
-    <!--/* Bad */-->
+    <!--/* Instead of */-->
     <div data-sly-element="${headlineElement}">${event.year}</div>
     <a data-sly-attribute.href="${event.link}" href="#"></a>
     <p data-sly-text="${event.year}" class="event__year"></p>
      
-    <!--/* Good */-->
+    <!--/* Use */-->
     <h2>${event.year}</h2>
     <a href="${event.link}"></a>
     <p class="event__year">${event.year}</p>
@@ -301,7 +305,7 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     It's cleaner to create separate files for your template markup, so your HTL scripts will not get cluttered. 
 
     ```html
-    <!--/* Bad */-->
+    <!--/* Instead of */-->
     <sly data-sly-use.teaser="com.example.TeaserComponent">
       <sly data-sly-template.teaserSmall="${@ title, text}">
         <h2>${title}</h2>
@@ -311,13 +315,13 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
       <sly data-sly-call="${teaserSmall @ title=teaser.title, text=teaser.text}"></sly>
     </sly>
     
-    <!--/* Good - Separate template file: "teaser-templates.html" */-->
+    <!--/* Use - Separate template file: "teaser-templates.html" */-->
     <sly data-sly-template.teaserSmall="${@ teaserModel}">
       <h2>${teaserModel.title}</h2>
       <p>${teaserModel.text}</p>
     </sly>
     
-    <!--/* Good - HTL script */-->
+    <!--/* Then use - HTL script */-->
     <sly data-sly-use.teaser="com.example.TeaserComponent" data-sly-use.teaserTemplates="teaser-templates.html">
       <sly data-sly-call="${teaserTemplates.teaserSmall @ teaserModel=teaser}"></sly>
     </sly>
