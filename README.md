@@ -122,7 +122,7 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     </sly>
     ```
     
-  - [3.4](#3.4) <a name='3.4'></a> **Avoid using the ternary operator unnecesarily**
+  - [3.4](#3.4) <a name='3.4'></a> **Avoid using the ternary operator unnecessarily**
   
     Take advantage of the logical `||` operator to simplify your code. 
 
@@ -361,7 +361,7 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     </sly>
     ```
 
-  - [4.11](#4.11) <a name='4.11'></a> **Avoid unnecesary `<sly>` tags.**
+  - [4.11](#4.11) <a name='4.11'></a> **Avoid unnecessary `<sly>` tags.**
   
     It's cleaner and easier to understand your intentions if you add your block statements in the relevant elements directly instead of wrapping them with an `sly` tag.
 
