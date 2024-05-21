@@ -121,7 +121,46 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
         ...
     </sly>
     ```
+    
+  - [3.4](#3.4) <a name='3.4'></a> **Avoid using the ternary operator unnecesarily**
   
+    Take advantage of the logical `||` operator to simplify your code. 
+
+    ```html
+    <!--/* Bad */-->
+    <div class="${cssClass ? cssClass : 'my-class'}"></div>
+ 
+    <!--/* Good */-->
+    <div class="${cssClass || 'my-class'}"></div>
+    ```
+    
+  - [3.5](#3.5) <a name='3.5'></a> **Use the native URI manipulation capabilities of HTL**
+  
+    Rolling out a custom URI builder is error prone and hardcoding URL's is even worse. Use [HTL URI Manipulation]([https://pages.github.com/](https://docs.adobe.com/content/help/en/experience-manager-htl/using/htl/block-statements.html#url-manipulation)) instead, in particular, the `extension` option.
+
+    ```html
+    <!--/* Bad */-->
+    <a href="${component.link}.html"></a>
+    
+    <!--/* Good */-->
+    <a href="${component.link @ extension = 'html'}"></a>
+    ```
+
+  - [3.6](#3.6) <a name='3.6'></a> **Drop Method Prefixes When Accessing Properties from Java Getter Functions
+
+    When following the [JavaBeans naming conventions](https://download.oracle.com/otndocs/jcp/7224-javabeans-1.01-fr-spec-oth-JSpec/) (as you should) to name your getter methods, you can access the properties with their property name directly. You should access properties this way for consistency and readability.
+
+    ```html
+    <!--/* Bad */-->
+    <p>${component.getTitle}</p>
+    <a href="${item.link}" data-sly-unwrap="${item.isActive}">...</a>
+    
+    <!--/* Good */-->
+    <p>${component.title}</p>
+    <a href="${item.link}" data-sly-unwrap="${item.active}">...</a>
+    ```
+
+    
 **[⬆ back to top](#table-of-contents)**
 
 <a name='block-statements'></a>
@@ -197,9 +236,9 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     </sly>
     ```
     
-  - [4.4](#4.4) <a name='4.4'></a> **Use camelcase for identifier names.**
+  - [4.4](#4.4) <a name='4.4'></a> **Use lowerCamelCase for identifier names.**
   
-    Using camelCase will help to increase the readability of your identifiers. Notice though that
+    Using lowerCamelCase will help to increase the readability of your identifiers. Notice though that
     HTL will internally only use (and log) lowercase identifiers. Also dashes are not allowed for identifiers.
 
     ```html
@@ -252,7 +291,6 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     
   - [4.7](#4.7) <a name='4.7'></a> **Always place block statements before the regular HTML attributes.**
 
-   
     The reason for that is that regular HTML attributes might use HTL variables which have been declared in the same element via `data-sly-use`. One should always declare things before using them. Also HTL block elements might influence if the element appears at all (via `data-sly-test`) or multiple times (via `data-sly-repeat`) and therefore are just too important to put them at the end of the attribute list. Further details in [issue 25](https://github.com/Netcentric/aem-htl-style-guide/issues/25).
     
     ```html
@@ -298,7 +336,7 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     
   - [4.10](#4.10) <a name='4.10'></a> **Always define your templates in a separate file.**
   
-    It's cleaner to create separate files for your template markup, so your HTL scripts will not get cluttered. 
+    It's cleaner to create separate files for your template markup, so your HTL scripts will not get cluttered.  
 
     ```html
     <!--/* Bad */-->
@@ -321,6 +359,32 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     <sly data-sly-use.teaser="com.example.TeaserComponent" data-sly-use.teaserTemplates="teaser-templates.html">
       <sly data-sly-call="${teaserTemplates.teaserSmall @ teaserModel=teaser}"></sly>
     </sly>
+    ```
+
+  - [4.11](#4.11) <a name='4.11'></a> **Avoid unnecesary `<sly>` tags.**
+  
+    It's cleaner and easier to understand your intentions if you add your block statements in the relevant elements directly instead of wrapping them with an `sly` tag.
+
+    ```html
+    <!--/* Bad */-->
+    <sly data-sly-test.title="${component.title}">
+      <h1>${title}</h1>
+    </sly>
+    
+    <!--/* Good */-->
+    <h1 data-sly-test.title="${component.title}">${title}</h1>
+    ```
+    
+  - [4.12](#4.12) <a name='4.12'></a> **Use an explicit `</sly>` end tag to close `<sly>` tags.**
+  
+    Beacuse `sly` is neither a void nor a foreign element (See [html5 start tags](https://html.spec.whatwg.org/multipage/syntax.html#start-tags)), it must be explicitly closed with and end tag `</sly>`. Using a self-closing tag is **not** allowed.
+
+    ```html
+    <!--/* Bad */-->
+    <sly data-sly-include="content.html"/>
+    
+    <!--/* Good */-->
+    <sly data-sly-include="content.html"></sly>
     ```
     
 **[⬆ back to top](#table-of-contents)**
