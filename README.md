@@ -238,18 +238,31 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
 
     ```html
     <!--/* Bad */-->
-    <section data-sly-test.full="${!teaser.empty}" class="teaser">
-        ...
-    </section>
-     
-    <div data-sly-test="${teaser.empty}" class="cq-placeholder"></div>
+    <div data-sly-unwrap="${!(wcmmode.edit || wcmmode.preview) || resource.hasChildren}">
+        <sly
+            data-sly-test="${resource.hasChildren}"
+            ...>
+        </sly>
+        <sly
+            data-sly-test="${(wcmmode.edit || wcmmode.preview) && !resource.hasChildren}"
+            .... >
+        </sly>
+    </div>
      
     <!--/* Good */-->
-    <section data-sly-test.hasContent="${!teaser.empty}" class="teaser">
-        ...
-    </section>
-     
-    <div data-sly-test="${!hasContent}" class="cq-placeholder"></div>
+    <div
+         data-sly-set.editMode="${(wcmmode.edit || wcmmode.preview)}"
+         data-sly-set.hasChildren="${resource.hasChildren}"
+         data-sly-unwrap="${!editMode || hasChildren}">
+        <sly
+            data-sly-test="${hasChildren}"
+            ...>
+        </sly>
+        <sly
+            data-sly-test="${editMode && !hasChildren}"
+            ...>
+        </sly>
+    </div>
     ```
 
   - [4.6](#4.6) <a name='4.6'></a> **Always use identifiers instead of the default “item” variable for list block statements.**
