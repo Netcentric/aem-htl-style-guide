@@ -216,7 +216,7 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     
   - [4.5](#4.5) <a name='4.5'></a> **Re-use expressions with identifiers**
 
-    If a test block statement is used multiple times, define an identifer and re-use it, for performance reasons.
+    If a test block statement is used multiple times, define an identifer and re-use it this way instead. This will allow the htl compiler to cache the expression result and will also make your code easier to read and understand.
 
     ```html
     <!--/* Bad */-->
@@ -234,7 +234,7 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     <div data-sly-test="${!hasContent}" class="cq-placeholder"></div>
     ```
 
-    Similarly, if a generic expression is used multiple times, define an identifer with `data-sly-set` and re-use it, for performance reasons.
+    Similarly, if a generic expression is used multiple times, define an identifer with `data-sly-set` and re-use it, for the same reasons stated above.
 
     ```html
     <!--/* Bad */-->
