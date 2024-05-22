@@ -358,7 +358,7 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
 
 - [4.11](#4.11) <a name='4.11'></a> **Avoid using data-sly-test to set arbitrary variable bindings**
 
-    Instead of setting a variable with `data-sly-test`, use the purposefully defined `data-sly-set`
+    Instead of binding a variable with `data-sly-test`, use the purposefully defined `data-sly-set`. This avoids unintentionally hiding elements if the result of the expression evaluates to false (see [HTL expressions evaluating to false](https://github.com/adobe/htl-spec/blob/master/SPECIFICATION.md#1151-boolean) ) and/or stopping the evaluation of further block statements; This is specially difficult to debug when various `data-sly-test` statements affect the same element.
 
     ```html
     <!--/* Instead of */-->
