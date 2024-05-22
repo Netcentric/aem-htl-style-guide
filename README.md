@@ -106,7 +106,7 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     </section>
     ```
 
-  - [3.3](#3.3) <a name='3.3'></a> **Avoid writting unnecessary expressions for literals.**
+  - [3.3](#3.3) <a name='3.3'></a> **Avoid writing unnecessary expressions for literals.**
   
     It might sound obvious, but an expression with just a string literal inside equals just that string literal.
 
@@ -127,9 +127,9 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
 <a name='block-statements'></a>
 ## 4. Block statements
 
-  - [4.1](#4.1) <a name='4.1'></a> **Use the `SlY` tag name for all elements that are not part of the markup.**
+  - [4.1](#4.1) <a name='4.1'></a> **Use the `sly` tag name for all elements that are not part of the markup.**
   
-    HTML elements with the tag name `SLY` are automatically getting unwrapped and will not be part of the final markup.
+    HTML elements with the tag name `sly` are automatically getting unwrapped and will not be part of the final markup.
 
     ```html
     <!--/* Bad */-->
@@ -155,7 +155,7 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     </sly>
     ```
     
-    **IMPORTANT** - The `SLY` element will not automatically unwrap itself if you use HTL 1.0 (AEM 6.0). In that case, you still have to add the `data-sly-unwrap` attribute.
+    **IMPORTANT** - The `sly` element will not automatically unwrap itself if you use HTL 1.0 (AEM 6.0). In that case, you still have to add the `data-sly-unwrap` attribute.
     
     ```html
     <!--/* Bad - HTL 1.0 */-->
@@ -165,7 +165,7 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     <sly data-sly-include="content.html" data-sly-unwrap></sly>
     ```
     
-  - [4.2](#4.2) <a name='4.2'></a> **Try to place use `data-sly-use` statements only on top-level elements.**
+  - [4.2](#4.2) <a name='4.2'></a> **Try to place `data-sly-use` statements only on top-level elements.**
     
     Since `data-sly-use` identifiers are always global (https://docs.adobe.com/docs/en/htl/docs/use-api/java.html#Local%20identifier), these attributes should only be placed in the top-level element. That way one can easily see name clashes and also it prevents initializing the same object twice.
     
