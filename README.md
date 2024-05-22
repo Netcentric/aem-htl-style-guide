@@ -122,7 +122,7 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     </sly>
     ```
     
-  - [3.4](#3.4) <a name='3.4'></a> **Avoid using the ternary operator unnecessarily**
+  - [3.4](#3.4) <a name='3.4'></a> **Avoid using the ternary operator unnecessarily.**
   
     Take advantage of the logical `||` operator to simplify your code. 
 
@@ -134,7 +134,7 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     <div class="${cssClass || 'my-class'}"></div>
     ```
     
-  - [3.5](#3.5) <a name='3.5'></a> **Use the native URI manipulation capabilities of HTL**
+  - [3.5](#3.5) <a name='3.5'></a> **Use the native URI manipulation capabilities of HTL.**
   
     Rolling out a custom URI builder is error prone and hardcoding URL's is even worse. Use [HTL URI Manipulation](https://github.com/adobe/htl-spec/blob/master/SPECIFICATION.md#125-uri-manipulation) instead, in particular, the `extension` option.
 
@@ -146,7 +146,7 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     <a href="${component.link @ extension = 'html'}"></a>
     ```
 
-  - [3.6](#3.6) <a name='3.6'></a> **Drop Method Prefixes When Accessing Properties from Java Getter Functions
+  - [3.6](#3.6) <a name='3.6'></a> **Drop Method Prefixes When Accessing Properties from Java Getter Functions.**
 
     When following the [JavaBeans naming conventions](https://download.oracle.com/otndocs/jcp/7224-javabeans-1.01-fr-spec-oth-JSpec/) (as you should) to name your getter methods, you can access the properties with their property name directly. You should access properties this way for consistency and readability.
 
