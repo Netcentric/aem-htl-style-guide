@@ -136,7 +136,7 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     
   - [3.5](#3.5) <a name='3.5'></a> **Use the native URI manipulation capabilities of HTL**
   
-    Rolling out a custom URI builder is error prone and hardcoding URL's is even worse. Use [HTL URI Manipulation]([https://pages.github.com/](https://docs.adobe.com/content/help/en/experience-manager-htl/using/htl/block-statements.html#url-manipulation)) instead, in particular, the `extension` option.
+    Rolling out a custom URI builder is error prone and hardcoding URL's is even worse. Use [HTL URI Manipulation](https://github.com/adobe/htl-spec/blob/master/SPECIFICATION.md#125-uri-manipulation) instead, in particular, the `extension` option.
 
     ```html
     <!--/* Bad */-->
