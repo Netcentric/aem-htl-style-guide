@@ -131,24 +131,29 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
   
     HTML elements with the tag name `sly` are automatically getting unwrapped and will not be part of the final markup.
 
+
     ```html
     <!--/* Bad */-->
     <div data-sly-include="content.html" data-sly-unwrap></div>
-     
+
+    <!--/* Good */-->
+    <sly data-sly-include="content.html"></sly>
+    ```
+
+    ```html
     <!--/* Bad */-->
     <div data-sly-resource="${item @ selectors='event'}" data-sly-unwrap></div>
-     
+
+    <!--/* Good */-->
+    <sly data-sly-resource="${item @ selectors = 'event'}"></sly>
+    ```
+
+    ```html
     <!--/* Bad */-->
     <div data-sly-test="${event.hasDate}" data-sly-unwrap>
         ...
     </div>
-     
-    <!--/* Good */-->
-    <sly data-sly-include="content.html"></sly>
-     
-    <!--/* Good */-->
-    <sly data-sly-resource="${item @ selectors = 'event'}"></sly>
-     
+
     <!--/* Good */-->
     <sly data-sly-test="${event.hasDate}">
         ...
