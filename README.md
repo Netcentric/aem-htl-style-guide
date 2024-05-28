@@ -430,7 +430,7 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
 
   - [4.13](#4.13) <a name='4.13'></a> **Use an explicit `</sly>` end tag to close `<sly>` tags.**
 
-    Because `sly` is neither a void nor a foreign element (See [html5 start tags](https://html.spec.whatwg.org/multipage/syntax.html#start-tags)), it must be explicitly closed with and end tag `</sly>`. Using a self-closing tag is **not** allowed.
+    Because `sly` is neither a void nor a foreign element (See [html5 start tags](https://html.spec.whatwg.org/multipage/syntax.html#start-tags)), it must be explicitly closed with an end tag `</sly>`. Using a self-closing tag is **not** allowed.
 
     ```html
     <!--/* Bad */-->
