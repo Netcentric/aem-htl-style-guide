@@ -45,7 +45,7 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
 <a name='comments'></a>
 ## 2. Comments
 
-  - [2.1](#2.1) <a name='2.1'></a> **Always use HTL comments.**
+  - [2.1](#2.1) <a name='2.1'></a> **Use HTL comments.**
   
     Normal HTML comments get rendered to the final markup. To keep the DOM clean, always use HTL comments over normal HTML comments.
 
@@ -60,7 +60,7 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
 <a name='expression-language'></a>
 ## 3. Expression language
 
-  - [3.1](#3.1) <a name='3.1'></a> **Only set a display context if necessary**
+  - [3.1](#3.1) <a name='3.1'></a> **Set a display context only if necessary**
   
     In most cases you can leave out the display context, because it is determined automatically.
 
@@ -72,7 +72,7 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     <a href="${teaser.link}"></a>
     ```
 
-  - [3.2](#3.2) <a name='3.2'></a> **Always use the safest possible display context.**
+  - [3.2](#3.2) <a name='3.2'></a> **Use the safest possible display context.**
 
     From the following list of contexts, always choose the one closest to the top that fits your needs:  
     `number`: For whole numbers (in HTML, JS or CSS)  
@@ -106,7 +106,7 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     </section>
     ```
 
-  - [3.3](#3.3) <a name='3.3'></a> **Don't write unnecessary expressions for literals.**
+  - [3.3](#3.3) <a name='3.3'></a> **Avoid writing unnecessary expressions for literals.**
   
     It might sound obvious, but an expression with just a string literal inside equals just that string literal.
 
@@ -166,35 +166,40 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
 <a name='block-statements'></a>
 ## 4. Block statements
 
-  - [4.1](#4.1) <a name='4.1'></a> **Use the SLY tag name for all elements that are not part of the markup.**
+  - [4.1](#4.1) <a name='4.1'></a> **Use the `sly` tag name for all elements that are not part of the markup.**
   
-    HTML elements with the tag name SLY are automatically getting unwrapped and will not be part of the final markup.
+    HTML elements with the tag name `sly` are automatically getting unwrapped and will not be part of the final markup.
+
 
     ```html
     <!--/* Bad */-->
     <div data-sly-include="content.html" data-sly-unwrap></div>
-     
+
+    <!--/* Good */-->
+    <sly data-sly-include="content.html"></sly>
+    ```
+
+    ```html
     <!--/* Bad */-->
     <div data-sly-resource="${item @ selectors='event'}" data-sly-unwrap></div>
-     
+
+    <!--/* Good */-->
+    <sly data-sly-resource="${item @ selectors = 'event'}"></sly>
+    ```
+
+    ```html
     <!--/* Bad */-->
     <div data-sly-test="${event.hasDate}" data-sly-unwrap>
         ...
     </div>
-     
-    <!--/* Good */-->
-    <sly data-sly-include="content.html"></sly>
-     
-    <!--/* Good */-->
-    <sly data-sly-resource="${item @ selectors = 'event'}"></sly>
-     
+
     <!--/* Good */-->
     <sly data-sly-test="${event.hasDate}">
         ...
     </sly>
     ```
     
-    **IMPORTANT** - The SLY element will not automatically unwrap itself if you use HTL 1.0 (AEM 6.0). In that case, you still have to add the "data-sly-unwrap" attribute.
+    **IMPORTANT** - The `sly` element will not automatically unwrap itself if you use HTL 1.0 (AEM 6.0). In that case, you still have to add the `data-sly-unwrap` attribute.
     
     ```html
     <!--/* Bad - HTL 1.0 */-->
@@ -204,9 +209,9 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     <sly data-sly-include="content.html" data-sly-unwrap></sly>
     ```
     
-  - [4.2](#4.2) <a name='4.2'></a> **Try to place use data-sly-use statements only on top-level elements.**
+  - [4.2](#4.2) <a name='4.2'></a> **Try to place `data-sly-use` statements only on top-level elements.**
     
-    Since data-sly-use identifiers are always global (https://docs.adobe.com/docs/en/htl/docs/use-api/java.html#Local%20identifier), these attributes should only be placed in the top-level element. That way one can easily see name clashes and also it prevents initializing the same object twice.
+    Since `data-sly-use` identifiers are always global (https://docs.adobe.com/docs/en/htl/docs/use-api/java.html#Local%20identifier), these attributes should only be placed in the top-level element. That way one can easily see name clashes and also it prevents initializing the same object twice.
     
      ```html
     <!--/* Bad */-->
@@ -253,7 +258,9 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     </sly>
     ```
     
-  - [4.5](#4.5) <a name='4.5'></a> **Always cache test block statement results in an identifier if it repeats itself.**
+  - [4.5](#4.5) <a name='4.5'></a> **Re-use expressions with identifiers**
+
+    If a test block statement is used multiple times, define an identifer and re-use it this way instead. This will allow the htl compiler to cache the expression result and will also make your code easier to read and understand.
 
     ```html
     <!--/* Bad */-->
@@ -270,8 +277,39 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
      
     <div data-sly-test="${!hasContent}" class="cq-placeholder"></div>
     ```
-    
-  - [4.6](#4.6) <a name='4.6'></a> **Always use identifiers instead of the default “item” variable for list block statements.**
+
+    Similarly, if a generic expression is used multiple times, define an identifer with `data-sly-set` and re-use it, for the same reasons stated above.
+
+    ```html
+    <!--/* Bad */-->
+    <div data-sly-unwrap="${!(wcmmode.edit || wcmmode.preview) || resource.hasChildren}">
+        <sly
+            data-sly-test="${resource.hasChildren}"
+            ...>
+        </sly>
+        <sly
+            data-sly-test="${(wcmmode.edit || wcmmode.preview) && !resource.hasChildren}"
+            .... >
+        </sly>
+    </div>
+     
+    <!--/* Good */-->
+    <div
+         data-sly-set.editMode="${(wcmmode.edit || wcmmode.preview)}"
+         data-sly-set.hasChildren="${resource.hasChildren}"
+         data-sly-unwrap="${!editMode || hasChildren}">
+        <sly
+            data-sly-test="${hasChildren}"
+            ...>
+        </sly>
+        <sly
+            data-sly-test="${editMode && !hasChildren}"
+            ...>
+        </sly>
+    </div>
+    ```
+
+  - [4.6](#4.6) <a name='4.6'></a> **Use identifiers instead of the default “item” variable for list block statements.**
 
     ```html
     <!--/* Bad */-->
@@ -289,7 +327,7 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     </ul>
     ```
     
-  - [4.7](#4.7) <a name='4.7'></a> **Always place block statements before the regular HTML attributes.**
+  - [4.7](#4.7) <a name='4.7'></a> **Place block statements before the regular HTML attributes.**
 
     The reason for that is that regular HTML attributes might use HTL variables which have been declared in the same element via `data-sly-use`. One should always declare things before using them. Also HTL block elements might influence if the element appears at all (via `data-sly-test`) or multiple times (via `data-sly-repeat`) and therefore are just too important to put them at the end of the attribute list. Further details in [issue 25](https://github.com/Netcentric/aem-htl-style-guide/issues/25).
     
@@ -302,7 +340,7 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     ```
  
     
-  - [4.8](#4.8) <a name='4.8'></a> **Always use existing HTML elements for your block statements if possible.**
+  - [4.8](#4.8) <a name='4.8'></a> **Use existing HTML elements for your block statements if possible.**
 
     ```html
     <!--/* Bad */-->
@@ -318,9 +356,9 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     </section>
     ```
     
-  - [4.9](#4.9) <a name='4.9'></a> **Try to avoid the element, attribute and text block statements.**
+  - [4.9](#4.9) <a name='4.9'></a> **Avoid the `element`, `attribute` and `text` block statements.**
   
-    It's a lot cleaner and explicit writing your HTL scripts without these block statements.
+    It's a lot cleaner and explicit to write your HTL scripts without these block statements.
 
     ```html
     <!--/* Bad */-->
@@ -334,7 +372,7 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     <p class="event__year">${event.year}</p>
     ```
     
-  - [4.10](#4.10) <a name='4.10'></a> **Always define your templates in a separate file.**
+  - [4.10](#4.10) <a name='4.10'></a> **Define your templates in a separate file.**
   
     It's cleaner to create separate files for your template markup, so your HTL scripts will not get cluttered.  
 
@@ -360,8 +398,24 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
       <sly data-sly-call="${teaserTemplates.teaserSmall @ teaserModel=teaser}"></sly>
     </sly>
     ```
+    
+  - [4.11](#4.11) <a name='4.11'></a> **Avoid using data-sly-test to set arbitrary variable bindings**
 
-  - [4.11](#4.11) <a name='4.11'></a> **Avoid unnecessary `<sly>` tags.**
+    Instead of binding a variable with `data-sly-test`, use the purposefully defined `data-sly-set`. This avoids unintentionally hiding elements if the result of the expression evaluates to false (see [HTL expressions evaluating to false](https://github.com/adobe/htl-spec/blob/master/SPECIFICATION.md#1151-boolean) ) and/or stopping the evaluation of further block statements; This is specially difficult to debug when various `data-sly-test` statements affect the same element.
+
+    ```html
+    <!--/* Instead of */-->
+    <sly data-sly-test="${person.firstName && person.lastName && person.image}" data-sly-test.fullName="${person.firstName} ${person.lastName}">
+    <h1>${fullName}</h1>
+    <img src=${person.image}" alt="${fullName}"/>
+     
+    <!--/* Use */-->
+    <sly data-sly-test="${person.firstName && person.lastName && person.image}" data-sly-set.fullName="${person.firstName} ${person.lastName}">
+    <h1>${fullName}</h1>
+    <img src=${person.image}" alt="${fullName}"/>
+    ```
+
+  - [4.12](#4.12) <a name='4.12'></a> **Avoid unnecessary `<sly>` tags.**
   
     It's cleaner and easier to understand your intentions if you add your block statements in the relevant elements directly instead of wrapping them with an `sly` tag.
 
@@ -375,7 +429,7 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     <h1 data-sly-test.title="${component.title}">${title}</h1>
     ```
     
-  - [4.12](#4.12) <a name='4.12'></a> **Use an explicit `</sly>` end tag to close `<sly>` tags.**
+  - [4.13](#4.13) <a name='4.13'></a> **Use an explicit `</sly>` end tag to close `<sly>` tags.**
   
     Because `sly` is neither a void nor a foreign element (See [html5 start tags](https://html.spec.whatwg.org/multipage/syntax.html#start-tags)), it must be explicitly closed with and end tag `</sly>`. Using a self-closing tag is **not** allowed.
 
