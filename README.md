@@ -219,7 +219,9 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     </sly>
     ```
     
-  - [4.5](#4.5) <a name='4.5'></a> **Cache test block statement results in an identifier if they repeat themselves.**
+  - [4.5](#4.5) <a name='4.5'></a> **Re-use expressions with identifiers**
+
+    If a test block statement is used multiple times, define an identifer and re-use it this way instead. This will allow the htl compiler to cache the expression result and will also make your code easier to read and understand.
 
     ```html
     <!--/* Bad */-->
@@ -236,7 +238,38 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
      
     <div data-sly-test="${!hasContent}" class="cq-placeholder"></div>
     ```
-    
+
+    Similarly, if a generic expression is used multiple times, define an identifer with `data-sly-set` and re-use it, for the same reasons stated above.
+
+    ```html
+    <!--/* Bad */-->
+    <div data-sly-unwrap="${!(wcmmode.edit || wcmmode.preview) || resource.hasChildren}">
+        <sly
+            data-sly-test="${resource.hasChildren}"
+            ...>
+        </sly>
+        <sly
+            data-sly-test="${(wcmmode.edit || wcmmode.preview) && !resource.hasChildren}"
+            .... >
+        </sly>
+    </div>
+     
+    <!--/* Good */-->
+    <div
+         data-sly-set.editMode="${(wcmmode.edit || wcmmode.preview)}"
+         data-sly-set.hasChildren="${resource.hasChildren}"
+         data-sly-unwrap="${!editMode || hasChildren}">
+        <sly
+            data-sly-test="${hasChildren}"
+            ...>
+        </sly>
+        <sly
+            data-sly-test="${editMode && !hasChildren}"
+            ...>
+        </sly>
+    </div>
+    ```
+
   - [4.6](#4.6) <a name='4.6'></a> **Use identifiers instead of the default “item” variable for list block statements.**
 
     ```html
@@ -327,6 +360,23 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
       <sly data-sly-call="${teaserTemplates.teaserSmall @ teaserModel=teaser}"></sly>
     </sly>
     ```
+
+- [4.11](#4.11) <a name='4.11'></a> **Avoid using data-sly-test to set arbitrary variable bindings**
+
+    Instead of binding a variable with `data-sly-test`, use the purposefully defined `data-sly-set`. This avoids unintentionally hiding elements if the result of the expression evaluates to false (see [HTL expressions evaluating to false](https://github.com/adobe/htl-spec/blob/master/SPECIFICATION.md#1151-boolean) ) and/or stopping the evaluation of further block statements; This is specially difficult to debug when various `data-sly-test` statements affect the same element.
+
+    ```html
+    <!--/* Instead of */-->
+    <sly data-sly-test="${person.firstName && person.lastName && person.image}" data-sly-test.fullName="${person.firstName} ${person.lastName}">
+    <h1>${fullName}</h1>
+    <img src=${person.image}" alt="${fullName}"/>
+     
+    <!--/* Use */-->
+    <sly data-sly-test="${person.firstName && person.lastName && person.image}" data-sly-set.fullName="${person.firstName} ${person.lastName}">
+    <h1>${fullName}</h1>
+    <img src=${person.image}" alt="${fullName}"/>
+    ```
+    
     
 **[⬆ back to top](#table-of-contents)**
 
