@@ -123,25 +123,25 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     ```
     
   - [3.4](#3.4) <a name='3.4'></a> **Avoid using the ternary operator unnecessarily.**
-  
+
     Take advantage of the logical `||` operator to simplify your code. 
 
     ```html
     <!--/* Bad */-->
     <div class="${cssClass ? cssClass : 'my-class'}"></div>
- 
+
     <!--/* Good */-->
     <div class="${cssClass || 'my-class'}"></div>
     ```
-    
+
   - [3.5](#3.5) <a name='3.5'></a> **Use the native URI manipulation capabilities of HTL.**
-  
+
     Rolling out a custom URI builder is error prone and hardcoding URL's is even worse. Use [HTL URI Manipulation](https://github.com/adobe/htl-spec/blob/master/SPECIFICATION.md#125-uri-manipulation) instead, in particular, the `extension` option.
 
     ```html
     <!--/* Bad */-->
     <a href="${component.link}.html"></a>
-    
+
     <!--/* Good */-->
     <a href="${component.link @ extension = 'html'}"></a>
     ```
@@ -154,13 +154,12 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     <!--/* Bad */-->
     <p>${component.getTitle}</p>
     <a href="${item.link}" data-sly-unwrap="${item.isActive}">...</a>
-    
+
     <!--/* Good */-->
     <p>${component.title}</p>
     <a href="${item.link}" data-sly-unwrap="${item.active}">...</a>
     ```
 
-    
 **[⬆ back to top](#table-of-contents)**
 
 <a name='block-statements'></a>
@@ -242,7 +241,7 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     ```
     
   - [4.4](#4.4) <a name='4.4'></a> **Use lowerCamelCase for identifier names.**
-  
+
     Using lowerCamelCase (You start by making the first word lowercase. Then, you capitalize the first letter of each word that follows i.e.: "sampleIdentifierName") will help to increase the readability of your identifiers. Notice though that
     HTL will internally only use (and log) full lowercase identifiers. Also dashes are not allowed for identifiers.
 
@@ -251,13 +250,13 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     <sly data-sly-use.mediagallery="com.example.MediaGallery">
         ...
     </sly>
-     
+
     <!--/* Good */-->
     <sly data-sly-use.mediaGallery="com.example.MediaGallery">
         ...
     </sly>
     ```
-    
+
   - [4.5](#4.5) <a name='4.5'></a> **Re-use expressions with identifiers**
 
     If a test block statement is used multiple times, define an identifer and re-use it this way instead. This will allow the htl compiler to cache the expression result and will also make your code easier to read and understand.
@@ -373,8 +372,8 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     ```
     
   - [4.10](#4.10) <a name='4.10'></a> **Define your templates in a separate file.**
-  
-    It's cleaner to create separate files for your template markup, so your HTL scripts will not get cluttered.  
+
+    It's cleaner to create separate files for your template markup, so your HTL scripts will not get cluttered.
 
     ```html
     <!--/* Bad */-->
@@ -398,7 +397,7 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
       <sly data-sly-call="${teaserTemplates.teaserSmall @ teaserModel=teaser}"></sly>
     </sly>
     ```
-    
+
   - [4.11](#4.11) <a name='4.11'></a> **Avoid using data-sly-test to set arbitrary variable bindings**
 
     Instead of binding a variable with `data-sly-test`, use the purposefully defined `data-sly-set`. This avoids unintentionally hiding elements if the result of the expression evaluates to false (see [HTL expressions evaluating to false](https://github.com/adobe/htl-spec/blob/master/SPECIFICATION.md#1151-boolean) ) and/or stopping the evaluation of further block statements; This is specially difficult to debug when various `data-sly-test` statements affect the same element.
@@ -408,7 +407,7 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     <sly data-sly-test="${person.firstName && person.lastName && person.image}" data-sly-test.fullName="${person.firstName} ${person.lastName}">
     <h1>${fullName}</h1>
     <img src=${person.image}" alt="${fullName}"/>
-     
+
     <!--/* Use */-->
     <sly data-sly-test="${person.firstName && person.lastName && person.image}" data-sly-set.fullName="${person.firstName} ${person.lastName}">
     <h1>${fullName}</h1>
@@ -416,7 +415,7 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     ```
 
   - [4.12](#4.12) <a name='4.12'></a> **Avoid unnecessary `<sly>` tags.**
-  
+
     It's cleaner and easier to understand your intentions if you add your block statements in the relevant elements directly instead of wrapping them with an `sly` tag.
 
     ```html
@@ -424,23 +423,23 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     <sly data-sly-test.title="${component.title}">
       <h1>${title}</h1>
     </sly>
-    
+
     <!--/* Good */-->
     <h1 data-sly-test.title="${component.title}">${title}</h1>
     ```
-    
+
   - [4.13](#4.13) <a name='4.13'></a> **Use an explicit `</sly>` end tag to close `<sly>` tags.**
-  
+
     Because `sly` is neither a void nor a foreign element (See [html5 start tags](https://html.spec.whatwg.org/multipage/syntax.html#start-tags)), it must be explicitly closed with and end tag `</sly>`. Using a self-closing tag is **not** allowed.
 
     ```html
     <!--/* Bad */-->
     <sly data-sly-include="content.html"/>
-    
+
     <!--/* Good */-->
     <sly data-sly-include="content.html"></sly>
     ```
-    
+
 **[⬆ back to top](#table-of-contents)**
 
 
