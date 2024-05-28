@@ -238,8 +238,8 @@ A style guide for the [HTML Template Language](https://docs.adobe.com/docs/en/ht
     
   - [4.4](#4.4) <a name='4.4'></a> **Use lowerCamelCase for identifier names.**
   
-    Using lowerCamelCase will help to increase the readability of your identifiers. Notice though that
-    HTL will internally only use (and log) lowercase identifiers. Also dashes are not allowed for identifiers.
+    Using lowerCamelCase (You start by making the first word lowercase. Then, you capitalize the first letter of each word that follows i.e.: "sampleIdentifierName") will help to increase the readability of your identifiers. Notice though that
+    HTL will internally only use (and log) full lowercase identifiers. Also dashes are not allowed for identifiers.
 
     ```html
     <!--/* Bad */-->
